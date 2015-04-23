@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author Brian
  */
-public class Hardwarekomponente {
+public class Komponente {
 
     private String bezeichnung;
     private int inventarNummer;
