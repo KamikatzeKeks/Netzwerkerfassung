@@ -4,6 +4,7 @@ public class CSVWriter {
 
 	public CSVWriter() {
 		// TODO Auto-generated constructor stub 
+		String test;
 	}
 
 	public static void main(String[] args) {
