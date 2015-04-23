@@ -1,8 +1,8 @@
 package netzwerkerfassung;
 
-public class CSVWriter {
+public class JSONReadWrite {
 
-	public CSVWriter() {
+	public JSONReadWrite() {
 		// TODO Auto-generated constructor stub 
 		String test;
 	}
