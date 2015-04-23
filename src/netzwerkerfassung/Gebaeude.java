@@ -5,14 +5,16 @@ import java.util.List;
 
 public class Gebaeude {
 
+	String bezeichnung;
 	String straﬂe;
 	String plz;
 	String ort;
 	int  anz_r‰ume;
 	List<Raum>raeume = new ArrayList<Raum>();
 	
-	public Gebaeude(String straﬂe, String plz, String ort, int anz_raeume) {
-		// TODO Auto-generated constructor stub
+	public Gebaeude(String bezeichnung, String straﬂe, String plz, String ort, int anz_raeume) {
+		
+		this.bezeichnung = bezeichnung;
 		this.straﬂe = straﬂe;
 		this.plz = plz;
 		this.ort = ort;
