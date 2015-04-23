@@ -22,8 +22,9 @@ public class Gebaeude {
 		for(int i = 0; i<=anz_raeume; i++){
 			Raum raum = new Raum(count);
 			raeume.add(raum);
-			count++;
+			count = count+1;
 		}
+	
 	}
 	
 
