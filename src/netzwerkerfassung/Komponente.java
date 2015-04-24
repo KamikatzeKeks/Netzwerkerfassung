@@ -18,10 +18,21 @@ public class Komponente {
     private String beschreibung;
     private Date beschaffungsDatum = new Date();
     private Date wartungsDatum = new Date();
+    private String gebaeude;
+    private String raum;
+    private String komponentenTyp;
     
     public Komponente(String bezeichnung)
     {
     	this.bezeichnung = bezeichnung;
+    }
+    
+    public Komponente(String bezeichnung, String komponentenTyp, String gebaeude, String raum){
+    	this.bezeichnung = bezeichnung;
+    	this.komponentenTyp = komponentenTyp;
+    	this.gebaeude = gebaeude;
+    	this.raum = raum;
+    	
     }
 
 	public String getBezeichnung() {
