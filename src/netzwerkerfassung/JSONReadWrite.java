@@ -19,11 +19,14 @@ public class JSONReadWrite {
 		gebaeude.add(new Gebaeude("101", "Musterstrasse", "64380", "Musterstadt", 5));
 		gebaeude.add(new Gebaeude("102", "Musterstrasse", "64380", "Musterstadt", 10));
 
+		createJSON();
 	}
 	
-	public void createJSON()
+	public static void createJSON()
 	{
 		JSONObject obj = new JSONObject();
+		
+		
 		obj.put("name", "mkyong.com");
 		obj.put("age", new Integer(100));
 	 
@@ -36,7 +39,7 @@ public class JSONReadWrite {
 	 
 		try {
 	 
-			FileWriter file = new FileWriter("c:\\test.json");
+			FileWriter file = new FileWriter("C:\\Users\\Davis\\git\\Netzwerkerfassung\\data");
 			file.write(obj.toJSONString());
 			file.flush();
 			file.close();
@@ -47,7 +50,7 @@ public class JSONReadWrite {
 	 
 		System.out.print(obj);
 	 
-	     }
+	}
 
 }
 

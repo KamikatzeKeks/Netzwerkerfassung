@@ -18,5 +18,34 @@ public class Komponente {
     private String beschreibung;
     private Date beschaffungsDatum = new Date();
     private Date wartungsDatum = new Date();
+    
+    public Komponente(String bezeichnung)
+    {
+    	this.bezeichnung = bezeichnung;
+    }
+
+	public String getBezeichnung() {
+		return bezeichnung;
+	}
+
+	public void setBezeichnung(String bezeichnung) {
+		this.bezeichnung = bezeichnung;
+	}
+
+	public int getInventarNummer() {
+		return inventarNummer;
+	}
+
+	public void setInventarNummer(int inventarNummer) {
+		this.inventarNummer = inventarNummer;
+	}
+
+	public String getBeschreibung() {
+		return beschreibung;
+	}
+
+	public void setBeschreibung(String beschreibung) {
+		this.beschreibung = beschreibung;
+	}
 
 }
