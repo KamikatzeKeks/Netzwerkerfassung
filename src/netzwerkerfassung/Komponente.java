@@ -13,7 +13,23 @@ import java.util.Date;
  */
 public class Komponente {
 
-    private String bezeichnung;
+    public String getGebaeude() {
+		return gebaeude;
+	}
+
+	public void setGebaeude(String gebaeude) {
+		this.gebaeude = gebaeude;
+	}
+
+	public String getRaum() {
+		return raum;
+	}
+
+	public void setRaum(String raum) {
+		this.raum = raum;
+	}
+
+	private String bezeichnung;
     private int inventarNummer;
     private String beschreibung;
     private Date beschaffungsDatum = new Date();
