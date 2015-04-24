@@ -21,29 +21,29 @@ public class CSVReadWrite {
 		// TODO Auto-generated constructor stub
 	}
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		List<Gebaeude>gebaeude = new ArrayList<Gebaeude>();
-		gebaeude.add(new Gebaeude("101", "Musterstrasse", "64380", "Musterstadt", 5));
-		gebaeude.add(new Gebaeude("102", "Musterstrasse", "64380", "Musterstadt", 10));
-		createCSV();
-	}
+//	public static void main(String[] args) {
+//		// TODO Auto-generated method stub
+//		List<Gebaeude>gebaeude = new ArrayList<Gebaeude>();
+//		gebaeude.add(new Gebaeude("101", "Musterstrasse", "64380", "Musterstadt", 5));
+//		gebaeude.add(new Gebaeude("102", "Musterstrasse", "64380", "Musterstadt", 10));
+//		createCSV();
+//	}
 	
-	public static void createCSV()
+	public static void createCSV(Komponente k1)
 	{
 
 		//Create new students objects
-		Komponente k1 = new PC("Acer PC", "103", "11111");
-		Komponente k2 = new Notebook("HP Pavilion", "103", "11111");
-		Komponente k3 = new Switch("Cisco C103", "103", "11111");
-		Komponente k4 = new Server("Cisco S220", "103", "11111");
-		
+//		Komponente k1 = new PC("Acer PC", "103", "11111");
+//		Komponente k2 = new Notebook("HP Pavilion", "103", "11111");
+//		Komponente k3 = new Switch("Cisco C103", "103", "11111");
+//		Komponente k4 = new Server("Cisco S220", "103", "11111");
+//		
 		//Create a new list of objects
 		List<Komponente> komponenten = new ArrayList<Komponente>();
 		komponenten.add(k1);
-		komponenten.add(k2);
-		komponenten.add(k3);
-		komponenten.add(k4);
+//		komponenten.add(k2);
+//		komponenten.add(k3);
+//		komponenten.add(k4);
 		
 		FileWriter fileWriter = null;
 				
@@ -61,7 +61,9 @@ public class CSVReadWrite {
 			{
 				fileWriter.append(String.valueOf(count++));
 				fileWriter.append(COMMA_DELIMITER);
-				fileWriter.append(String.valueOf(k.getBeschreibung()));
+				fileWriter.append(String.valueOf(k.getBezeichnung()));
+				fileWriter.append(COMMA_DELIMITER);
+				fileWriter.append(String.valueOf(k.getKomponentenTyp()));
 				fileWriter.append(COMMA_DELIMITER);
 				fileWriter.append(String.valueOf(k.getGebaeude()));
 				fileWriter.append(COMMA_DELIMITER);

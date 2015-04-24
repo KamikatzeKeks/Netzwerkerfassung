@@ -15,13 +15,14 @@ public class MainForm extends JFrame {
 	private JTextField jTfBezeichnung;
 	private JLabel jLBezeichnung;
 	private JLabel jLRaumNummer;
-	private JButton btnKomponentenlisteAnzeigenbearbeiten;
+	private JButton jBtnKomponentenlisteAnzeigenBearbeiten;
 	private JLabel jLKomponente;
 	JLabel jLGebaeude;
 	JButton jBtnKomponenteHinzufuegen;
 	JComboBox jCBGebaeude;
 	JComboBox jCBKomponente;
 	JComboBox jCBRaumnummer ;
+	CSVReadWrite csvTool = new CSVReadWrite();
 	/**
 	 * Launch the application.
 	 */
@@ -55,6 +56,8 @@ public class MainForm extends JFrame {
 		contentPane.add(jLRaumNummer);
 		
 		 jCBKomponente = new JComboBox();
+	        jCBKomponente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "C100", "C101", "C102", "C103","C104","C105"}));
+
 		jCBKomponente.setBounds(214, 29, 271, 22);
 		contentPane.add(jCBKomponente);
 		
@@ -73,11 +76,13 @@ public class MainForm extends JFrame {
 		contentPane.add(jLGebaeude);
 		
 		 jCBGebaeude = new JComboBox();
+	        jCBGebaeude.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "C100", "C101", "C102", "C103","C104","C105"}));
+
 		jCBGebaeude.setBounds(28, 81, 174, 22);
 		contentPane.add(jCBGebaeude);
 		jCBGebaeude.getSelectedIndex();
 		
-		jBtnKomponenteHinzufuegen = new JButton();
+		jBtnKomponenteHinzufuegen = new JButton("Komponente hinzufügen");
 		jBtnKomponenteHinzufuegen.setBounds(28, 116, 174, 25);
 		contentPane.add(jBtnKomponenteHinzufuegen);
 		jBtnKomponenteHinzufuegen.addActionListener(new ActionListener() {
@@ -86,40 +91,42 @@ public class MainForm extends JFrame {
 				jBtnKomponenteHinzufuegenActionPerformed(e);
 			}
 		});
-		btnKomponentenlisteAnzeigenbearbeiten = new JButton();
-		btnKomponentenlisteAnzeigenbearbeiten.setBounds(214, 116, 271, 25);
-		contentPane.add(btnKomponentenlisteAnzeigenbearbeiten);
+		jBtnKomponentenlisteAnzeigenBearbeiten = new JButton("Liste Anzeigen/Bearbeiten");
+		jBtnKomponentenlisteAnzeigenBearbeiten.setBounds(214, 116, 271, 25);
+		contentPane.add(jBtnKomponentenlisteAnzeigenBearbeiten);
 		
-		btnKomponentenlisteAnzeigenbearbeiten = new JButton("Komponentenliste anzeigen/bearbeiten");
-		btnKomponentenlisteAnzeigenbearbeiten.addActionListener(new ActionListener() {
+		jBtnKomponentenlisteAnzeigenBearbeiten = new JButton("Komponentenliste anzeigen/bearbeiten");
+		jBtnKomponentenlisteAnzeigenBearbeiten.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				jBtnKomponentenlisteAnzeigenbearbeitenActionPerformed(e);
 			}
 		});
-		btnKomponentenlisteAnzeigenbearbeiten.setBounds(214, 116, 271, 25);
-		contentPane.add(btnKomponentenlisteAnzeigenbearbeiten);
+		jBtnKomponentenlisteAnzeigenBearbeiten.setBounds(214, 116, 271, 25);
+		contentPane.add(jBtnKomponentenlisteAnzeigenBearbeiten);
 	}
 	
 	private void  jBtnKomponentenlisteAnzeigenbearbeitenActionPerformed(ActionEvent e){
-		
+		BearbeitenDialog dialog = new BearbeitenDialog();
+		dialog.setVisible(true);
 		
 	}
 	
 	private void jBtnKomponenteHinzufuegenActionPerformed(ActionEvent e){
-		System.out.println("test");
-		System.out.println(jCBRaumnummer.getSelectedItem().toString());
+		generateObject();
 	}
 	
 	private void generateObject(){
 		
 	String bezeichnung = 	jTfBezeichnung.getText();
-	String komponentenTyp = jCBGebaeude.getSelectedItem().toString();
-	String gebaeude;
-	String raum; 
+	String komponentenTyp = jCBKomponente.getSelectedItem().toString();
+	String gebaeude = jCBGebaeude.getSelectedItem().toString();
+	String raum = jCBRaumnummer.getSelectedItem().toString();
 		
-		//Komponente komponente = new Komponente(String bezeichnung, String komponentenTyp, String gebaeude, String raum);
-		
+	
+	Komponente komponente = new Komponente(bezeichnung,  komponentenTyp,  gebaeude,  raum);
+	
+	csvTool.createCSV(komponente);
 		
 	}
 }

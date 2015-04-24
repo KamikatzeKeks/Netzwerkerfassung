@@ -45,7 +45,31 @@ public class Komponente {
     	this.raum = raum;
     }
     
-    public Komponente(String bezeichnung, String komponentenTyp, String gebaeude, String raum){
+    public Date getBeschaffungsDatum() {
+		return beschaffungsDatum;
+	}
+
+	public void setBeschaffungsDatum(Date beschaffungsDatum) {
+		this.beschaffungsDatum = beschaffungsDatum;
+	}
+
+	public Date getWartungsDatum() {
+		return wartungsDatum;
+	}
+
+	public void setWartungsDatum(Date wartungsDatum) {
+		this.wartungsDatum = wartungsDatum;
+	}
+
+	public String getKomponentenTyp() {
+		return komponentenTyp;
+	}
+
+	public void setKomponentenTyp(String komponentenTyp) {
+		this.komponentenTyp = komponentenTyp;
+	}
+
+	public Komponente(String bezeichnung, String komponentenTyp, String gebaeude, String raum){
     	this.bezeichnung = bezeichnung;
     	this.komponentenTyp = komponentenTyp;
     	this.gebaeude = gebaeude;
