@@ -38,9 +38,11 @@ public class Komponente {
     private String raum;
     private String komponentenTyp;
     
-    public Komponente(String bezeichnung)
+    public Komponente(String bezeichnung, String gebaeude, String raum)
     {
     	this.bezeichnung = bezeichnung;
+    	this.gebaeude = gebaeude;
+    	this.raum = raum;
     }
     
     public Komponente(String bezeichnung, String komponentenTyp, String gebaeude, String raum){
