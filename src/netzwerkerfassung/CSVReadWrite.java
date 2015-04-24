@@ -63,6 +63,9 @@ public class CSVReadWrite {
 				fileWriter.append(COMMA_DELIMITER);
 				fileWriter.append(String.valueOf(k.getBeschreibung()));
 				fileWriter.append(COMMA_DELIMITER);
+				fileWriter.append(String.valueOf("101"));
+				fileWriter.append(COMMA_DELIMITER);
+				fileWriter.append(String.valueOf("302"));
 				fileWriter.append(NEW_LINE);
 			}
 
