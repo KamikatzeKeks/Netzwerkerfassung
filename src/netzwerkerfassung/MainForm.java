@@ -18,8 +18,9 @@ public class MainForm extends JFrame {
 	private JButton btnKomponentenlisteAnzeigenbearbeiten;
 	private JLabel jLKomponente;
 	JLabel jLGebaeude;
-	JButton btnKomponenteHinzufgen;
+	JButton jBtnKompo;
 	JComboBox jCBGebaeude;
+	JComboBox jCBKomponente;
 	/**
 	 * Launch the application.
 	 */
@@ -52,7 +53,7 @@ public class MainForm extends JFrame {
 		jLRaumNummer.setBounds(214, 64, 116, 16);
 		contentPane.add(jLRaumNummer);
 		
-		JComboBox jCBKomponente = new JComboBox();
+		 jCBKomponente = new JComboBox();
 		jCBKomponente.setBounds(214, 29, 271, 22);
 		contentPane.add(jCBKomponente);
 		
@@ -60,7 +61,9 @@ public class MainForm extends JFrame {
 		jLKomponente.setBounds(214, 13, 56, 16);
 		contentPane.add(jLKomponente);
 		
-		JComboBox jCBRaumnummer = new JComboBox();
+		JComboBox jCBRaumnummer = new JComboBox() ;	
+        jCBRaumnummer.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "C100", "C101", "C102", "C103","C104","C105"}));
+
 		jCBRaumnummer.setBounds(214, 81, 271, 22);
 		contentPane.add(jCBRaumnummer);
 		
@@ -73,14 +76,9 @@ public class MainForm extends JFrame {
 		contentPane.add(jCBGebaeude);
 		jCBGebaeude.getSelectedIndex();
 		
-		 btnKomponenteHinzufgen = new JButton("Komponente hinzuf\u00FCgen");
-		btnKomponenteHinzufgen.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnKomponenteHinzufgen.setBounds(28, 116, 174, 25);
-		contentPane.add(btnKomponenteHinzufgen);
+	
+		jBtnKompo.setBounds(28, 116, 174, 25);
+		contentPane.add(jBtnKompo);
 		
 		btnKomponentenlisteAnzeigenbearbeiten = new JButton("Komponentenliste anzeigen/bearbeiten");
 		btnKomponentenlisteAnzeigenbearbeiten.addActionListener(new ActionListener() {
@@ -94,6 +92,22 @@ public class MainForm extends JFrame {
 	}
 	
 	private void  jBtnKomponentenlisteAnzeigenbearbeitenActionPerformed(ActionEvent e){
+		
+		
+	}
+	
+	private void btnKomponentehinzufuegenActionPerformed(ActionEvent e){
+		
+	}
+	
+	private void generateObject(){
+		
+	String bezeichnung = 	jTfBezeichnung.getText();
+	String komponentenTyp = jCBGebaeude.getSelectedItem().toString();
+	String gebaeude;
+	String raum; 
+		
+		Komponente komponente = new Komponente(String bezeichnung, String komponentenTyp, String gebaeude, String raum);
 		
 		
 	}

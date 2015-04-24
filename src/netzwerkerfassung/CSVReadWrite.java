@@ -33,10 +33,10 @@ public class CSVReadWrite {
 	{
 
 		//Create new students objects
-		Komponente k1 = new PC("Acer PC");
-		Komponente k2 = new Notebook("HP Pavilion");
-		Komponente k3 = new Switch("Cisco C103");
-		Komponente k4 = new Server("Cisco S220");
+		Komponente k1 = new PC("Acer PC", "103", "11111");
+		Komponente k2 = new Notebook("HP Pavilion", "103", "11111");
+		Komponente k3 = new Switch("Cisco C103", "103", "11111");
+		Komponente k4 = new Server("Cisco S220", "103", "11111");
 		
 		//Create a new list of objects
 		List<Komponente> komponenten = new ArrayList<Komponente>();
@@ -48,7 +48,7 @@ public class CSVReadWrite {
 		FileWriter fileWriter = null;
 				
 		try {
-			fileWriter = new FileWriter("data.csv");
+			fileWriter = new FileWriter("data1.csv");
 
 			//Write the CSV file header
 			fileWriter.append(FILE_HEADER.toString());
@@ -63,9 +63,9 @@ public class CSVReadWrite {
 				fileWriter.append(COMMA_DELIMITER);
 				fileWriter.append(String.valueOf(k.getBeschreibung()));
 				fileWriter.append(COMMA_DELIMITER);
-				fileWriter.append(String.valueOf("101"));
+				fileWriter.append(String.valueOf(k.getGebaeude()));
 				fileWriter.append(COMMA_DELIMITER);
-				fileWriter.append(String.valueOf("302"));
+				fileWriter.append(String.valueOf(k.getRaum()));
 				fileWriter.append(NEW_LINE);
 			}
 
