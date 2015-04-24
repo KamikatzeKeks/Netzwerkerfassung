@@ -1,5 +1,8 @@
 package netzwerkerfassung;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,7 +38,8 @@ public class CSVReadWrite {
 		komponenten.add(k3);
 		komponenten.add(k4);
 		
-		writeCSV(komponenten);
+		//writeCSV(komponenten);
+		readCSV();
 	}
 	
 	public static void writeCSV(List<Komponente> komponenten)
@@ -86,5 +90,45 @@ public class CSVReadWrite {
 			
 		}
 	}
+	
+	public static void readCSV() 
+	{
+		BufferedReader br;
+		ArrayList<ArrayList> data = new ArrayList<ArrayList>();
+		String readline;
+		String[] splittedLine;
+		
+		try
+		{
+			br = new BufferedReader(new FileReader("data.csv"));
+			
+			while ((readline = br.readLine()) != null)
+			{
+				ArrayList<String> lines = new ArrayList<String>();
+				splittedLine = readline.split(",");
+				for (int x = 0; x < splittedLine.length; x++)
+				{
+					lines.add(splittedLine[x]);
+				}
+				data.add(lines);
+			}
+		} 
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		for (ArrayList l : data) 
+		{
+			for (Object s : l) 
+			{
+				System.out.print(s.toString() + ", ");
+			}
+			System.out.println();
+		}
+		
+	}
 
+
+         
 }
