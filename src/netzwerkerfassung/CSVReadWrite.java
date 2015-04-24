@@ -21,34 +21,30 @@ public class CSVReadWrite {
 		// TODO Auto-generated constructor stub
 	}
 
-//	public static void main(String[] args) {
-//		// TODO Auto-generated method stub
-//		List<Gebaeude>gebaeude = new ArrayList<Gebaeude>();
-//		gebaeude.add(new Gebaeude("101", "Musterstrasse", "64380", "Musterstadt", 5));
-//		gebaeude.add(new Gebaeude("102", "Musterstrasse", "64380", "Musterstadt", 10));
-//		createCSV();
-//	}
-	
-	public static void createCSV(Komponente k1)
-	{
-
-		//Create new students objects
-//		Komponente k1 = new PC("Acer PC", "103", "11111");
-//		Komponente k2 = new Notebook("HP Pavilion", "103", "11111");
-//		Komponente k3 = new Switch("Cisco C103", "103", "11111");
-//		Komponente k4 = new Server("Cisco S220", "103", "11111");
-//		
-		//Create a new list of objects
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Komponente k1 = new PC("Acer PC", "PC", "103", "11111");
+		Komponente k2 = new Notebook("HP Pavilion", "Notebook", "103", "11111");
+		Komponente k3 = new Switch("Cisco C103", "Switch", "103", "11111");
+		Komponente k4 = new Server("Cisco S220", "Server", "103", "11111");
+		
 		List<Komponente> komponenten = new ArrayList<Komponente>();
 		komponenten.add(k1);
-//		komponenten.add(k2);
-//		komponenten.add(k3);
-//		komponenten.add(k4);
+		komponenten.add(k2);
+		komponenten.add(k3);
+		komponenten.add(k4);
+		
+		writeCSV(komponenten);
+	}
+	
+	public static void writeCSV(List<Komponente> komponenten)
+	{
 		
 		FileWriter fileWriter = null;
 				
 		try {
-			fileWriter = new FileWriter("data1.csv");
+			fileWriter = new FileWriter("data.csv");
 
 			//Write the CSV file header
 			fileWriter.append(FILE_HEADER.toString());
