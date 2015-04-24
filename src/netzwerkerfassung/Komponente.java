@@ -29,7 +29,7 @@ public class Komponente {
 		this.raum = raum;
 	}
 
-	private String bezeichnung;
+	public String bezeichnung;
     private int inventarNummer;
     private String beschreibung;
     private Date beschaffungsDatum = new Date();
