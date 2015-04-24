@@ -18,9 +18,10 @@ public class MainForm extends JFrame {
 	private JButton btnKomponentenlisteAnzeigenbearbeiten;
 	private JLabel jLKomponente;
 	JLabel jLGebaeude;
-	JButton jBtnKompo;
+	JButton jBtnKomponenteHinzufuegen;
 	JComboBox jCBGebaeude;
 	JComboBox jCBKomponente;
+	JComboBox jCBRaumnummer ;
 	/**
 	 * Launch the application.
 	 */
@@ -61,7 +62,7 @@ public class MainForm extends JFrame {
 		jLKomponente.setBounds(214, 13, 56, 16);
 		contentPane.add(jLKomponente);
 		
-		JComboBox jCBRaumnummer = new JComboBox() ;	
+		 jCBRaumnummer = new JComboBox() ;	
         jCBRaumnummer.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "C100", "C101", "C102", "C103","C104","C105"}));
 
 		jCBRaumnummer.setBounds(214, 81, 271, 22);
@@ -76,9 +77,18 @@ public class MainForm extends JFrame {
 		contentPane.add(jCBGebaeude);
 		jCBGebaeude.getSelectedIndex();
 		
-	
-		jBtnKompo.setBounds(28, 116, 174, 25);
-		contentPane.add(jBtnKompo);
+		jBtnKomponenteHinzufuegen = new JButton();
+		jBtnKomponenteHinzufuegen.setBounds(28, 116, 174, 25);
+		contentPane.add(jBtnKomponenteHinzufuegen);
+		jBtnKomponenteHinzufuegen.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				jBtnKomponenteHinzufuegenActionPerformed(e);
+			}
+		});
+		btnKomponentenlisteAnzeigenbearbeiten = new JButton();
+		btnKomponentenlisteAnzeigenbearbeiten.setBounds(214, 116, 271, 25);
+		contentPane.add(btnKomponentenlisteAnzeigenbearbeiten);
 		
 		btnKomponentenlisteAnzeigenbearbeiten = new JButton("Komponentenliste anzeigen/bearbeiten");
 		btnKomponentenlisteAnzeigenbearbeiten.addActionListener(new ActionListener() {
@@ -96,8 +106,9 @@ public class MainForm extends JFrame {
 		
 	}
 	
-	private void btnKomponentehinzufuegenActionPerformed(ActionEvent e){
-		
+	private void jBtnKomponenteHinzufuegenActionPerformed(ActionEvent e){
+		System.out.println("test");
+		System.out.println(jCBRaumnummer.getSelectedItem().toString());
 	}
 	
 	private void generateObject(){
@@ -107,7 +118,7 @@ public class MainForm extends JFrame {
 	String gebaeude;
 	String raum; 
 		
-		Komponente komponente = new Komponente(String bezeichnung, String komponentenTyp, String gebaeude, String raum);
+		//Komponente komponente = new Komponente(String bezeichnung, String komponentenTyp, String gebaeude, String raum);
 		
 		
 	}
