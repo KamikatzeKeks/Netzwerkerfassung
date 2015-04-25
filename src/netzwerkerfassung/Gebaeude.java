@@ -6,28 +6,78 @@ import java.util.List;
 public class Gebaeude {
 
 	String bezeichnung;
-	String straﬂe;
+	String strasse;
 	String plz;
 	String ort;
-	int  anz_r‰ume;
+	int  anz_raeume;
 	List<Raum>raeume = new ArrayList<Raum>();
 	
-	public Gebaeude(String bezeichnung, String straﬂe, String plz, String ort, int anz_raeume) {
-		
+	public Gebaeude(String bezeichnung, String strasse, String plz, String ort, int anz_raeume) {
+
 		this.bezeichnung = bezeichnung;
-		this.straﬂe = straﬂe;
+		this.strasse = strasse;
 		this.plz = plz;
 		this.ort = ort;
-		
+		this.anz_raeume = anz_raeume;
 		int count = 100;
 		
 		for(int i = 0; i<=anz_raeume; i++){
-			Raum raum = new Raum(count);
-			raeume.add(raum);
+			raeume.add(new Raum(count));
 			count = count+1;
 		}
+
+	}
+	
+	public String getBezeichnung() {
+		return bezeichnung;
+	}
+	public int getAnzRaeume() {
+		return anz_raeume;
+	}
+	
+	public String getStrasse() {
+		return strasse;
+	}
+	
+	public String getPlz() {
+		return plz;
+	}
+	
+	public String getOrt() {
+		return ort;
+	}
+	
+	public List<Raum> getRaeume() {
+		return raeume;
+	}
+	
+	public void setBezeichnung (String bez) {
+		this.bezeichnung = bez;
+	}
+	
+	public void setStrasse(String strasse) {
+		this.strasse = strasse;
 	
 	}
 	
-
+	public void setPlz(String plz) {
+		this.plz = plz;
+	}
+	
+	public void setOrt(String ort) {
+		this.ort = ort;
+	}
+	
+	public void setAnzRaeume(int anz_raeume){
+		this.anz_raeume = anz_raeume;
+	}
+	
+	public void setRaeume(List<Raum>raeume) {
+		this.raeume = raeume;
+	}
+	
 }
+
+	
+
+
