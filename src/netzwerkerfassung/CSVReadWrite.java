@@ -63,7 +63,7 @@ public class CSVReadWrite {
 //		
 //}
 	
-	public static void writeCSV(List<Komponente> komponenten)
+	public static void writeCsvGeraete(List<Komponente> komponenten)
 	{
 		
 		FileWriter fileWriter = null;

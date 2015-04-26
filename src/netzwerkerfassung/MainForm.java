@@ -7,9 +7,12 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainForm extends JFrame {
 	private JTextField jTfBezeichnung;
@@ -17,22 +20,18 @@ public class MainForm extends JFrame {
 	private JLabel jLRaumNummer;
 	private JButton jBtnKomponentenlisteAnzeigenBearbeiten;
 	private JLabel jLKomponente;
-	JLabel jLGebaeude;
-	JButton jBtnKomponenteHinzufuegen;
-	JComboBox jCBGebaeude;
-	JComboBox jCBKomponente;
-	JComboBox jCBRaumnummer ;
-	CSVReadWrite csvTool = new CSVReadWrite();
-	/**
-	 * Launch the application.
-	 */
+	private JLabel jLGebaeude;
+	private JButton jBtnKomponenteHinzufuegen;
+	private JComboBox jCBGebaeude;
+	private JComboBox jCBKomponente;
+	private JComboBox jCBRaumnummer ;
+	private CSVReadWrite csvReaderWriter = new CSVReadWrite();
+	private List<Komponente> komponentenListe = new ArrayList<Komponente>();
 	
-
-
-	/**
-	 * Create the frame.
-	 */
 	public MainForm() {
+		
+		this.komponentenListe = csvReaderWriter.readCSV();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 536, 220);
 		JPanel contentPane = new JPanel();
@@ -126,7 +125,8 @@ public class MainForm extends JFrame {
 	
 	Komponente komponente = new Komponente(bezeichnung,  komponentenTyp,  gebaeude,  raum);
 	
-	csvTool.createCSV(komponente);
-		
+	System.out.println(komponentenListe.add(komponente));
+	
+	csvReaderWriter.writeCsvGeraete(komponentenListe);
 	}
 }
