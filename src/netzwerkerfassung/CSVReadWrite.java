@@ -71,11 +71,19 @@ public class CSVReadWrite {
 		try {
 			fileWriter = new FileWriter("data.csv");
 
-			//Write the CSV file header
-			fileWriter.append(FILE_HEADER.toString());
+				
+//			
+//			//Write the CSV file header
+//			fileWriter.append(FILE_HEADER.toString());
+//			
+//			//Add a new line separator after the header
+//			fileWriter.append(System.lineSeparator());
+//			
 			
-			//Add a new line separator after the header
-			fileWriter.append(NEW_LINE);
+			
+
+				
+			
 			
 			//Write a new student object list to the CSV file
 			for (Komponente k : komponenten) 
@@ -87,7 +95,7 @@ public class CSVReadWrite {
 				fileWriter.append(String.valueOf(k.getGebaeude()));
 				fileWriter.append(COMMA_DELIMITER);
 				fileWriter.append(String.valueOf(k.getRaum()));
-				fileWriter.append(NEW_LINE);
+				fileWriter.append(System.lineSeparator());
 			}
 
 			
@@ -122,7 +130,7 @@ public class CSVReadWrite {
 			fileWriter.append(FILE_HEADER_BUILDING.toString());
 			
 			//Add a new line separator after the header
-			fileWriter.append(NEW_LINE);
+			fileWriter.append(System.lineSeparator());
 			
 	
 			for (Gebaeude g : gebaeude) 
@@ -140,7 +148,7 @@ public class CSVReadWrite {
 					fileWriter.append(String.valueOf(r));
 					//System.out.println(r);
 				}
-				fileWriter.append(NEW_LINE);
+				fileWriter.append(System.lineSeparator());
 			}
 
 			
