@@ -93,10 +93,7 @@ public class MainForm extends JFrame {
 		jBtnKomponentenlisteAnzeigenBearbeiten = new JButton("Liste Anzeigen/Bearbeiten");
 		jBtnKomponentenlisteAnzeigenBearbeiten.setBounds(214, 116, 271, 25);
 		contentPane.add(jBtnKomponentenlisteAnzeigenBearbeiten);
-		
-		jBtnKomponentenlisteAnzeigenBearbeiten = new JButton("Komponentenliste anzeigen/bearbeiten");
 		jBtnKomponentenlisteAnzeigenBearbeiten.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				jBtnKomponentenlisteAnzeigenbearbeitenActionPerformed(e);
 			}
@@ -106,8 +103,13 @@ public class MainForm extends JFrame {
 	}
 	
 	private void  jBtnKomponentenlisteAnzeigenbearbeitenActionPerformed(ActionEvent e){
-		BearbeitenDialog dialog = new BearbeitenDialog();
-		dialog.setVisible(true);
+//		BearbeitenDialog dialog = new BearbeitenDialog();
+//		dialog.setVisible(true);
+		System.out.println("Test");
+		for(Komponente komponente : komponentenListe){
+			
+			System.out.println("Bezeichnung: " + komponente.getBezeichnung() + " Typ: " +komponente.getKomponentenTyp() + " Gebäude: " + komponente.getGebaeude() +" Raum: " + komponente.getRaum());
+		}
 		
 	}
 	
@@ -129,4 +131,6 @@ public class MainForm extends JFrame {
 	
 	csvReaderWriter.writeCsvGeraete(komponentenListe);
 	}
+	
+	
 }
