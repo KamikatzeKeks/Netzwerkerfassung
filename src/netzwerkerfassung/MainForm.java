@@ -1,6 +1,7 @@
 package netzwerkerfassung;
 
 import javax.swing.JFrame;
+
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -20,6 +21,19 @@ import javax.swing.JTable;
 import javax.swing.JList;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+
+/**
+ * Diese Klasse(und das restliche Programm) wurde aufgrund von Zeitmangel quick
+ * and dirty geschrieben Besonders bei dieser Frame möchte ich darauf hinweisen,
+ * dass uns bewusst ist, dass normalerweise gewisse Prozesse in eigene Klassen
+ * ausgelagert werden. Da es sich noch um die frühste lauffähige Version handelt
+ * ist dies noch nicht geschehen.
+ * 
+ * 
+ * 
+ * @author Brian Korduan
+ *
+ */
 
 public class MainForm extends JFrame {
 
