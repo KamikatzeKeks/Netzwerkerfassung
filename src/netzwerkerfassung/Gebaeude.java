@@ -21,7 +21,7 @@ public class Gebaeude {
 		this.anz_raeume = anz_raeume;
 		int count = 100;
 		
-		for(int i = 0; i<=anz_raeume; i++){
+		for(int i = 0; i<anz_raeume; i++){
 			raeume.add(new Raum(count));
 			count = count+1;
 		}

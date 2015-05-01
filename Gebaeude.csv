@@ -1,3 +1,3 @@
 Bezeichnung, Straße, Plz, Ort, Räume
-Gebaude1,teststrasse,64291,Da,netzwerkerfassung.Raum@15db9742netzwerkerfassung.Raum@6d06d69cnetzwerkerfassung.Raum@7852e922netzwerkerfassung.Raum@4e25154f
-Gebaude2,teststrasse2,64291,Dar,netzwerkerfassung.Raum@70dea4enetzwerkerfassung.Raum@5c647e05netzwerkerfassung.Raum@33909752netzwerkerfassung.Raum@55f96302netzwerkerfassung.Raum@3d4eac69
+Gebaude1,teststrasse,64291,Da,[100,101,102,]
+Gebaude2,teststrasse2,64291,Dar,[100,101,102,103,]

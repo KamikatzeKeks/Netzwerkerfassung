@@ -18,5 +18,9 @@ public class Raum {
 	{
 		komponenten.add(k);
 	}
+	
+	public int getRaumnummer() {
+		return raumnummer;
+	}
 
 }

@@ -25,9 +25,9 @@ public class CSVReadWrite {
 	}
 
 //	main Methode zum testen.
-//public static void main(String[] args) {
+//	public static void main(String[] args) {
 	
-//	Gebaeude g1 = new Gebaeude("Gebaude1", "teststrasse", "64291", "Da", 3);
+//Gebaeude g1 = new Gebaeude("Gebaude1", "teststrasse", "64291", "Da", 3);
 //	Gebaeude g2 = new Gebaeude("Gebaude2", "teststrasse2", "64291", "Dar", 4);
 	
 //	List<Gebaeude>gebaeude = new ArrayList<Gebaeude>();
@@ -79,11 +79,7 @@ public class CSVReadWrite {
 //			//Add a new line separator after the header
 //			fileWriter.append(System.lineSeparator());
 //			
-			
-			
 
-				
-			
 			
 			//Write a new student object list to the CSV file
 			for (Komponente k : komponenten) 
@@ -144,12 +140,24 @@ public class CSVReadWrite {
 				fileWriter.append(String.valueOf(g.getOrt()));
 				fileWriter.append(COMMA_DELIMITER);
 				
+				int count = 0;
 				for(Raum r:g.getRaeume()) {
-					fileWriter.append(String.valueOf(r));
+					System.out.println(g.getAnzRaeume());
+					if(count == 0) {
+						fileWriter.append("[");
+					}
+					count ++;
+					
+					fileWriter.append(String.valueOf(r.getRaumnummer()));
+					fileWriter.append(COMMA_DELIMITER);
+					
+				
 					//System.out.println(r);
 				}
+				fileWriter.append("]");
 				fileWriter.append(System.lineSeparator());
 			}
+			
 
 			
 			
