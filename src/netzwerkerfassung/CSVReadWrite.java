@@ -37,7 +37,14 @@ public class CSVReadWrite {
 //	writeCSVGebaeude(gebaeude);
 //gebaeude = readCSVGebaeude();
 //for(Gebaeude g: gebaeude){
-//	System.out.println(g.getBezeichnung() + " " + g.getStrasse() + " " + g.getPlz() + " " + g.getOrt() + " " + g.getAnzRaeume());
+
+//	System.out.println(g.getBezeichnung() + " " + g.getStrasse() + " " + g.getPlz() + " " + g.getOrt() + " ");
+//	System.out.println("Räume:");
+//	for(int i=0; i<g.getRaeume().size(); i++){
+//		System.out.println("Raumnummer " + g.getListRaeume().get(i).getRaumnummer());
+//	}
+//	System.out.println("\n");
+	
 //}
 	
 //		// TODO Auto-generated method stub
@@ -229,7 +236,7 @@ public class CSVReadWrite {
 		List<ArrayList> data = new ArrayList<ArrayList>();
 		String readline;
 		String[] splittedLine;
-
+		
 		
 		try
 		{
@@ -238,21 +245,34 @@ public class CSVReadWrite {
 			while ((readline = br.readLine()) != null)
 			{
 				List<String> lines = new ArrayList<String>();
+				List<Raum>raeume = new ArrayList<Raum>();
 				//splittedLine = readline.split(",");
 				
 				splittedLine = readline.split(",");
-				int anz_raeume = 0;
+				//int anz_raeume = 0;
 				
 				if(readline.contains("[")) {
 				
 					String countraeume = readline.substring(readline.indexOf("[")+1, readline.indexOf("]"));
 
 					//Anzahl der Räume zahlen
-					for (int i=0;i<countraeume.length();i++) {
-						if (countraeume.charAt(i) == ',') {
-							anz_raeume ++;
-						 }
+					//for (int i=0;i<countraeume.length();i++) {
+						//if (countraeume.charAt(i) == ',') {
+							//anz_raeume ++;
+						 //}
+					//}
+					
+					String[] split_raeume = countraeume.split(",");
+					
+					for(int i = 0; i<split_raeume.length; i++) {
+						raeume.add(new Raum(Integer.parseInt(split_raeume[i])));
 					}
+					
+					/*for(int i=0; i<raeume.size(); i++){
+						
+						System.out.println(raeume.get(i).getRaumnummer());
+					}*/
+					
 					
 				}
 
@@ -260,9 +280,12 @@ public class CSVReadWrite {
 				{
 					lines.add(splittedLine[x]);
 				}
-				Integer count_raeume = new Integer(anz_raeume); 
 				//System.out.println(count_raeume.toString());
-				lines.add(count_raeume.toString());
+				for(int y = 0; y<raeume.size(); y++) {
+					Integer intRaeume = new Integer(raeume.get(y).getRaumnummer());
+					lines.add(intRaeume.toString());
+				}
+				//lines.add(count_raeume.toString());
 				
 				data.add((ArrayList) lines);
 			}
@@ -284,7 +307,14 @@ public class CSVReadWrite {
 				object.add(s.toString());
 			}
 			//System.out.println();
-			gebaeude.add(new Gebaeude(object.get(0), object.get(1), object.get(2), object.get(3), Integer.parseInt(object.get(4))));
+			List<Raum>list_raeume = new ArrayList<Raum>();
+			for(int c = 4; c<object.size(); c++) {
+				Raum raum = new Raum(Integer.parseInt(object.get(c)));
+				list_raeume.add(raum);
+				boolean test =true;
+			}
+			gebaeude.add(new Gebaeude(object.get(0), object.get(1), object.get(2), object.get(3), list_raeume));
+		
 		}
 		
 		return gebaeude;

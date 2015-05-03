@@ -11,7 +11,8 @@ public class Gebaeude {
 	String ort;
 	int  anz_raeume;
 	List<Raum>raeume = new ArrayList<Raum>();
-	
+	List<Raum>list_raeume = new ArrayList<Raum>();
+	//Raum[] array_raeume;
 	public Gebaeude(String bezeichnung, String strasse, String plz, String ort, int anz_raeume) {
 
 		this.bezeichnung = bezeichnung;
@@ -26,6 +27,15 @@ public class Gebaeude {
 			count = count+1;
 		}
 
+	}
+	
+	public Gebaeude(String bezeichnung, String strasse, String plz, String ort, List<Raum>list_raeume) {
+		this.bezeichnung = bezeichnung;
+		this.strasse = strasse;
+		this.plz = plz;
+		this.ort = ort;
+		this.list_raeume = list_raeume;
+		this.raeume = list_raeume;
 	}
 	
 	public String getBezeichnung() {
@@ -50,7 +60,9 @@ public class Gebaeude {
 	public List<Raum> getRaeume() {
 		return raeume;
 	}
-	
+	public List<Raum> getListRaeume() {
+		return list_raeume;
+	}
 	public void setBezeichnung (String bez) {
 		this.bezeichnung = bez;
 	}
