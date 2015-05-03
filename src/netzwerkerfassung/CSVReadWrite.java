@@ -25,20 +25,20 @@ public class CSVReadWrite {
 	}
 
 //	main Methode zum testen.
-//	public static void main(String[] args) {
+//public static void main(String[] args) {
 	
 //Gebaeude g1 = new Gebaeude("Gebaude1", "teststrasse", "64291", "Da", 3);
 //	Gebaeude g2 = new Gebaeude("Gebaude2", "teststrasse2", "64291", "Dar", 4);
 	
-//	List<Gebaeude>gebaeude = new ArrayList<Gebaeude>();
+//List<Gebaeude>gebaeude = new ArrayList<Gebaeude>();
 //	gebaeude.add(g1);
 //	gebaeude.add(g2);
 	
 //	writeCSVGebaeude(gebaeude);
-	
-//	for(Gebaeude g: gebaeude){
-//		System.out.println(g.getBezeichnung() + " " + g.getStrasse() + " " + g.getPlz() + " " + g.getOrt());
-//	}
+//gebaeude = readCSVGebaeude();
+//for(Gebaeude g: gebaeude){
+//	System.out.println(g.getBezeichnung() + " " + g.getStrasse() + " " + g.getPlz() + " " + g.getOrt() + " " + g.getAnzRaeume());
+//}
 	
 //		// TODO Auto-generated method stub
 //		
@@ -229,6 +229,7 @@ public class CSVReadWrite {
 		List<ArrayList> data = new ArrayList<ArrayList>();
 		String readline;
 		String[] splittedLine;
+
 		
 		try
 		{
@@ -237,11 +238,32 @@ public class CSVReadWrite {
 			while ((readline = br.readLine()) != null)
 			{
 				List<String> lines = new ArrayList<String>();
+				//splittedLine = readline.split(",");
+				
 				splittedLine = readline.split(",");
-				for (int x = 0; x < splittedLine.length; x++)
+				int anz_raeume = 0;
+				
+				if(readline.contains("[")) {
+				
+					String countraeume = readline.substring(readline.indexOf("[")+1, readline.indexOf("]"));
+
+					//Anzahl der Räume zahlen
+					for (int i=0;i<countraeume.length();i++) {
+						if (countraeume.charAt(i) == ',') {
+							anz_raeume ++;
+						 }
+					}
+					
+				}
+
+				for (int x = 0; x <= 3; x++)
 				{
 					lines.add(splittedLine[x]);
 				}
+				Integer count_raeume = new Integer(anz_raeume); 
+				//System.out.println(count_raeume.toString());
+				lines.add(count_raeume.toString());
+				
 				data.add((ArrayList) lines);
 			}
 		} 
