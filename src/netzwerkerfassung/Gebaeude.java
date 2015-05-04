@@ -88,6 +88,13 @@ public class Gebaeude {
 		this.raeume = raeume;
 	}
 	
+	@Override
+	public String toString() {
+		
+		
+		return bezeichnung;
+	}
+	
 }
 
 	

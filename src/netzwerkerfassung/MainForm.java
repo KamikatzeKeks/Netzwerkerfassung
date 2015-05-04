@@ -59,7 +59,7 @@ public class MainForm extends JFrame {
 		this.komponentenListe = csvReaderWriter.readCSV();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 526, 474);
+		setBounds(100, 100, 689, 494);
 		JPanel contentPane = new JPanel();
 		contentPane.setSize(new Dimension(150, 60));
 		contentPane.setMinimumSize(new Dimension(150, 10));
@@ -92,10 +92,11 @@ public class MainForm extends JFrame {
 		jLKomponente.setBounds(214, 13, 56, 16);
 		contentPane.add(jLKomponente);
 
+		jCBGebaeude = new JComboBox();
+		readBuildings();
+		
 		jCBRaumnummer = new JComboBox();
-		jCBRaumnummer
-				.setModel(new javax.swing.DefaultComboBoxModel(new String[] {
-						"C100", "C101", "C102", "C103", "C104", "C105" }));
+		readRooms();
 
 		jCBRaumnummer.setBounds(214, 81, 271, 22);
 		contentPane.add(jCBRaumnummer);
@@ -104,9 +105,10 @@ public class MainForm extends JFrame {
 		jLGebaeude.setBounds(28, 64, 56, 16);
 		contentPane.add(jLGebaeude);
 
-		jCBGebaeude = new JComboBox();
-		jCBGebaeude.setModel(new javax.swing.DefaultComboBoxModel(new String[] {
-				"G1", "G2", "G3" }));
+//		jCBGebaeude = new JComboBox();
+//		readBuildings();
+//		jCBGebaeude.setModel(new javax.swing.DefaultComboBoxModel(new String[] {
+//				"G1", "G2", "G3" }));
 
 		jCBGebaeude.setBounds(28, 81, 174, 22);
 		contentPane.add(jCBGebaeude);
@@ -133,12 +135,12 @@ public class MainForm extends JFrame {
 		// contentPane.add(table);
 
 		scrollPane_1 = new JScrollPane(table);
-		scrollPane_1.setBounds(28, 152, 457, 239);
+		scrollPane_1.setBounds(28, 152, 610, 239);
 		contentPane.add(scrollPane_1);
 
 		JButton jBtnAenderungenUebernehmen = new JButton(
 				"Änderungen Übernehmen");
-		jBtnAenderungenUebernehmen.setBounds(28, 401, 217, 23);
+		jBtnAenderungenUebernehmen.setBounds(28, 401, 185, 23);
 		contentPane.add(jBtnAenderungenUebernehmen);
 		jBtnAenderungenUebernehmen.addActionListener(new ActionListener() {
 
@@ -149,16 +151,56 @@ public class MainForm extends JFrame {
 
 		jBtnAuswahlLoeschen = new JButton(
 				"Ausgew\u00E4hltes Objekt L\u00F6schen");
-		jBtnAuswahlLoeschen.setBounds(255, 401, 230, 23);
+		jBtnAuswahlLoeschen.setBounds(228, 401, 230, 23);
 		contentPane.add(jBtnAuswahlLoeschen);
+		
+		JButton jBtnGebaeudeBearbeiten = new JButton("Geb\u00E4ude Bearbeiten");
+		jBtnGebaeudeBearbeiten.setBounds(470, 400, 168, 25);
+		contentPane.add(jBtnGebaeudeBearbeiten);
 		jBtnAuswahlLoeschen.addActionListener(new ActionListener() {
-
 			public void actionPerformed(ActionEvent e) {
 				jBtnAuswahlLoeschenActionPerformed(e);
 			}
 		});
+		
+		//Die Coole Version eines ActionListeners ab 1.8 lamda methoden
+		//jBtnAuswahlLoeschen.addActionListener(e -> jBtnAuswahlLoeschenActionPerformed(e));
 
 	}
+	
+	private void readBuildings(){
+		Object[]  gebaeudeBezeichnungen = new Object[50];
+
+		int i = 0;
+		for (Gebaeude gebaeude : CSVReadWrite.readCSVGebaeude()) {
+			
+		
+			gebaeudeBezeichnungen[i]= gebaeude;
+			i++;
+		}
+		jCBGebaeude.setModel(new javax.swing.DefaultComboBoxModel(gebaeudeBezeichnungen));	
+	}
+	
+	private void readRooms(){
+		
+		List<Raum> raumListe = new ArrayList<>();
+		
+		Gebaeude gebaeude =  (Gebaeude)jCBGebaeude.getSelectedItem();
+			
+		raumListe = gebaeude.getListRaeume();
+		
+		jCBRaumnummer.setModel(new javax.swing.DefaultComboBoxModel(raumListe.toArray()));	
+
+			
+		}
+
+		
+		
+	
+			
+		
+		
+	
 
 	private void fillTable() {
 

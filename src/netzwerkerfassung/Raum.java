@@ -22,5 +22,10 @@ public class Raum {
 	public int getRaumnummer() {
 		return raumnummer;
 	}
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return String.valueOf(raumnummer);
+	}
 
 }
