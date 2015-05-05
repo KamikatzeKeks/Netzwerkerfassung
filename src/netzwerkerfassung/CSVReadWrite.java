@@ -17,8 +17,8 @@ public class CSVReadWrite {
 	private static final String NEW_LINE = "\n";
 		
 	//CSV file header
-	private static final String FILE_HEADER = "Bezeichnung,KomponentenTyp,Geb‰ude,Raum";
-	private static final String FILE_HEADER_BUILDING = "Bezeichnung, Straﬂe, Plz, Ort, R‰ume";
+//	private static final String FILE_HEADER = "Bezeichnung,KomponentenTyp,Geb‰ude,Raum";
+//	private static final String FILE_HEADER_BUILDING = "Bezeichnung, Straﬂe, Plz, Ort, R‰ume";
 
 	public CSVReadWrite() {
 		// TODO Auto-generated constructor stub
@@ -130,7 +130,7 @@ public class CSVReadWrite {
 			fileWriter = new FileWriter("Gebaeude.csv");
 
 			//Write the CSV file header
-			fileWriter.append(FILE_HEADER_BUILDING.toString());
+	//		fileWriter.append(FILE_HEADER_BUILDING.toString());
 			
 			//Add a new line separator after the header
 			fileWriter.append(System.lineSeparator());

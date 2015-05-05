@@ -49,7 +49,7 @@ public class GebaeudeBuilderDialog extends JDialog {
 
 	
 	public GebaeudeBuilderDialog() {
-		setBounds(100, 100, 302, 459);
+		setBounds(100, 100, 400, 500);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
