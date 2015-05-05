@@ -39,176 +39,145 @@ import java.awt.event.ItemEvent;
 
 public class MainForm extends JFrame {
 
-	private JTextField jTfBezeichnung;
 	private JLabel jLBezeichnung;
 	private JLabel jLRaumNummer;
 	private JLabel jLKomponente;
 	private JLabel jLGebaeude;
-	private JButton jBtnKomponenteHinzufuegen;
-	private JComboBox jCBGebaeude;
-	private JComboBox jCBKomponente;
-	private JComboBox jCBRaumnummer;
-	private CSVReadWrite csvReaderWriter = new CSVReadWrite();
-	private List<Komponente> komponentenListe = new ArrayList<Komponente>();
-	private JTable table;
-	private DefaultTableModel tableModel;
-	private JScrollPane scrollPane;
-	private JScrollPane scrollPane_1;
+	private JTextField jTfBezeichnung;
 	private JButton jBtnAuswahlLoeschen;
+	private JButton jBtnKomponenteHinzufuegen;
+	private JComboBox<Gebaeude> jCBGebaeude;
+	private JComboBox<Komponente> jCBKomponente;
+	private JComboBox<Raum> jCBRaumnummer;
+	private List<Komponente> komponentenListe = new ArrayList<Komponente>();
+	private JTable jTableKomponentenListe;
+	private DefaultTableModel jDefaultTableModel;
+	private JScrollPane jScPaTableView;
 
 	public MainForm() {
 
-		this.komponentenListe = csvReaderWriter.readCSV();
-
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 689, 494);
-		JPanel contentPane = new JPanel();
-		contentPane.setSize(new Dimension(150, 60));
-		contentPane.setMinimumSize(new Dimension(150, 10));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-
-		jTfBezeichnung = new JTextField();
-		jTfBezeichnung.setBounds(28, 29, 174, 22);
-		contentPane.add(jTfBezeichnung);
-		jTfBezeichnung.setColumns(10);
-
-		jLBezeichnung = new JLabel("Bezeichnung");
-		jLBezeichnung.setBounds(30, 13, 114, 16);
-		contentPane.add(jLBezeichnung);
-
-		jLRaumNummer = new JLabel("Raumnummer");
-		jLRaumNummer.setBounds(214, 64, 116, 16);
-		contentPane.add(jLRaumNummer);
-
-		jCBKomponente = new JComboBox();
-		jCBKomponente.setModel(new javax.swing.DefaultComboBoxModel(
-				new String[] { "Desktop PC", "Server", "Laptop", "Switch",
-						"Router", "Anderes" }));
-
-		jCBKomponente.setBounds(214, 29, 271, 22);
-		contentPane.add(jCBKomponente);
-
-		jLKomponente = new JLabel("Ger\u00E4tetyp");
-		jLKomponente.setBounds(214, 13, 56, 16);
-		contentPane.add(jLKomponente);
-
-		jCBGebaeude = new JComboBox();
-		jCBGebaeude.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
-				jCbGebaeudeItemChanged(e);
-			}
-		});
-		readBuildings();
+		this.komponentenListe = CSVReadWrite.readCSV();
+		{
+			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			setBounds(100, 100, 689, 494);
+			JPanel contentPane = new JPanel();
+			contentPane.setSize(new Dimension(150, 60));
+			contentPane.setMinimumSize(new Dimension(150, 10));
+			contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+			setContentPane(contentPane);
+			contentPane.setLayout(null);
+			
 		
-		jCBRaumnummer = new JComboBox();
-		readRooms();
-
-		jCBRaumnummer.setBounds(214, 81, 271, 22);
-		contentPane.add(jCBRaumnummer);
-
-		JLabel jLGebaeude = new JLabel("Geb\u00E4ude");
-		jLGebaeude.setBounds(28, 64, 56, 16);
-		contentPane.add(jLGebaeude);
-
-//		jCBGebaeude = new JComboBox();
-//		readBuildings();
-//		jCBGebaeude.setModel(new javax.swing.DefaultComboBoxModel(new String[] {
-//				"G1", "G2", "G3" }));
-
-		jCBGebaeude.setBounds(28, 81, 174, 22);
-		contentPane.add(jCBGebaeude);
-		jCBGebaeude.getSelectedIndex();
-
-		jBtnKomponenteHinzufuegen = new JButton("Komponente hinzufügen");
-		jBtnKomponenteHinzufuegen.setBounds(28, 116, 457, 25);
-		contentPane.add(jBtnKomponenteHinzufuegen);
-		jBtnKomponenteHinzufuegen.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-				jBtnKomponenteHinzufuegenActionPerformed(e);
-			}
-		});
-
-		Object col[] = { "Bezeichnung", "KomponentenTyp", "Gebäude", "Raum" };
-		tableModel = new DefaultTableModel(col, 0);
-		fillTable();
-
-		table = new JTable(tableModel);
-		table.setColumnSelectionAllowed(true);
-		table.setBounds(28, 152, 457, 228);
-
-		// contentPane.add(table);
-
-		scrollPane_1 = new JScrollPane(table);
-		scrollPane_1.setBounds(28, 152, 610, 239);
-		contentPane.add(scrollPane_1);
-
-		JButton jBtnAenderungenUebernehmen = new JButton(
-				"Änderungen Übernehmen");
-		jBtnAenderungenUebernehmen.setBounds(28, 401, 185, 23);
-		contentPane.add(jBtnAenderungenUebernehmen);
-		jBtnAenderungenUebernehmen.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-				jBtnAenderungenUebernehmenActionPerformed(e);
-			}
-		});
-
-		jBtnAuswahlLoeschen = new JButton(
-				"Ausgew\u00E4hltes Objekt L\u00F6schen");
-		jBtnAuswahlLoeschen.setBounds(228, 401, 230, 23);
-		contentPane.add(jBtnAuswahlLoeschen);
+			jLGebaeude = new JLabel("Geb\u00E4ude");
+			jLGebaeude.setBounds(28, 64, 56, 16);
+			contentPane.add(jLGebaeude);
+			
+			jLBezeichnung = new JLabel("Bezeichnung");
+			jLBezeichnung.setBounds(30, 13, 114, 16);
+			contentPane.add(jLBezeichnung);
+			
+			jLRaumNummer = new JLabel("Raumnummer");
+			jLRaumNummer.setBounds(214, 64, 116, 16);
+			contentPane.add(jLRaumNummer);
+			
+			jLKomponente = new JLabel("Ger\u00E4tetyp");
+			jLKomponente.setBounds(214, 13, 56, 16);
+			contentPane.add(jLKomponente);
 		
-		JButton jBtnGebaeudeBearbeiten = new JButton("Geb\u00E4ude Bearbeiten");
-		jBtnGebaeudeBearbeiten.setBounds(470, 400, 168, 25);
-		contentPane.add(jBtnGebaeudeBearbeiten);
-		jBtnAuswahlLoeschen.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				jBtnAuswahlLoeschenActionPerformed(e);
-			}
-		});
-		
-		//Die Coole Version eines ActionListeners ab 1.8 lamda methoden
-		//jBtnAuswahlLoeschen.addActionListener(e -> jBtnAuswahlLoeschenActionPerformed(e));
-
-	}
+			jTfBezeichnung = new JTextField();
+			jTfBezeichnung.setBounds(28, 29, 174, 22);
+			contentPane.add(jTfBezeichnung);
+			jTfBezeichnung.setColumns(10);
 	
-	private void readBuildings(){
-		Object[]  gebaeudeBezeichnungen = new Object[50];
+			
+			jCBKomponente = new JComboBox<>();
+			jCBKomponente.setBounds(214, 29, 271, 22);
+			jCBKomponente.setModel(new javax.swing.DefaultComboBoxModel(
+					new String[] { "Desktop PC", "Server", "Laptop", "Switch",
+							"Router", "Anderes" }));
+			contentPane.add(jCBKomponente);
+		
+		
+			jCBGebaeude = new JComboBox<>();
+			readBuildings();
+			jCBGebaeude.addItemListener(e -> jCbGebaeudeItemChanged(e));
+
+
+			jCBRaumnummer = new JComboBox<>();
+			readRooms();
+			jCBRaumnummer.setBounds(214, 81, 271, 22);
+			contentPane.add(jCBRaumnummer);
+		
+		
+			jCBGebaeude.setBounds(28, 81, 174, 22);
+			contentPane.add(jCBGebaeude);
+			jCBGebaeude.getSelectedIndex();
+			
+			JButton jBtnAenderungenUebernehmen = new JButton("Änderungen Übernehmen");
+			jBtnAenderungenUebernehmen.setBounds(28, 401, 185, 23);
+			contentPane.add(jBtnAenderungenUebernehmen);
+			jBtnAenderungenUebernehmen.addActionListener(e-> jBtnAenderungenUebernehmenActionPerformed(e));
+	
+		
+			jBtnKomponenteHinzufuegen = new JButton("Komponente hinzufügen");
+			jBtnKomponenteHinzufuegen.setBounds(28, 116, 457, 25);
+			contentPane.add(jBtnKomponenteHinzufuegen);
+			jBtnKomponenteHinzufuegen.addActionListener(e -> jBtnKomponenteHinzufuegenActionPerformed(e));
+
+			
+			jBtnAuswahlLoeschen = new JButton("Ausgewähltes Objekt löschen");
+			jBtnAuswahlLoeschen.setBounds(228, 401, 230, 23);
+			contentPane.add(jBtnAuswahlLoeschen);
+			jBtnAuswahlLoeschen.addActionListener(e -> jBtnAuswahlLoeschenActionPerformed(e));
+
+			
+			JButton jBtnGebaeudeBearbeiten = new JButton(
+					"Geb\u00E4ude Bearbeiten");
+			jBtnGebaeudeBearbeiten.setBounds(470, 400, 168, 25);
+			contentPane.add(jBtnGebaeudeBearbeiten);
+			
+		
+		
+			Object col[] = { "Bezeichnung", "KomponentenTyp", "Gebäude", "Raum" };
+			jDefaultTableModel = new DefaultTableModel(col, 0);
+			fillTable();
+
+			jTableKomponentenListe = new JTable(jDefaultTableModel);
+			jTableKomponentenListe.setColumnSelectionAllowed(true);
+			jTableKomponentenListe.setBounds(28, 152, 457, 228);
+		
+		
+			jScPaTableView = new JScrollPane(jTableKomponentenListe);
+			jScPaTableView.setBounds(28, 152, 610, 239);
+			contentPane.add(jScPaTableView);
+		
+		}
+	}
+
+	private void readBuildings() {
+		Object[] gebaeudeBezeichnungen = new Object[50];
 
 		int i = 0;
 		for (Gebaeude gebaeude : CSVReadWrite.readCSVGebaeude()) {
-			
-		
-			gebaeudeBezeichnungen[i]= gebaeude;
+
+			gebaeudeBezeichnungen[i] = gebaeude;
 			i++;
 		}
-		jCBGebaeude.setModel(new javax.swing.DefaultComboBoxModel(gebaeudeBezeichnungen));	
+		jCBGebaeude.setModel(new javax.swing.DefaultComboBoxModel(
+				gebaeudeBezeichnungen));
 	}
-	
-	private void readRooms(){
-		
+
+	private void readRooms() {
+
 		List<Raum> raumListe = new ArrayList<>();
-		
-		Gebaeude gebaeude =  (Gebaeude)jCBGebaeude.getSelectedItem();
-		
-			
+
+		Gebaeude gebaeude = (Gebaeude) jCBGebaeude.getSelectedItem();
+
 		raumListe = gebaeude.getListRaeume();
-		
-		jCBRaumnummer.setModel(new javax.swing.DefaultComboBoxModel(raumListe.toArray()));	
 
-			
-		}
+		jCBRaumnummer.setModel(new javax.swing.DefaultComboBoxModel(raumListe.toArray()));
 
-		
-		
-	
-			
-		
-		
-	
+	}
 
 	private void fillTable() {
 
@@ -221,7 +190,7 @@ public class MainForm extends JFrame {
 
 			Object[] data = { bezeichnung, komponentenTyp, gebaeude, raum };
 
-			tableModel.addRow(data);
+			jDefaultTableModel.addRow(data);
 		}
 
 	}
@@ -248,12 +217,12 @@ public class MainForm extends JFrame {
 
 		komponentenListe.clear();
 
-		for (int i = 0; i < tableModel.getRowCount(); i++) {
-			System.out.println(tableModel.getRowCount());
-			bezeichnung = tableModel.getValueAt(i, 0).toString();
-			komponentenTyp = tableModel.getValueAt(i, 1).toString();
-			gebaeude = tableModel.getValueAt(i, 2).toString();
-			raum = tableModel.getValueAt(i, 3).toString();
+		for (int i = 0; i < jDefaultTableModel.getRowCount(); i++) {
+			System.out.println(jDefaultTableModel.getRowCount());
+			bezeichnung = jDefaultTableModel.getValueAt(i, 0).toString();
+			komponentenTyp = jDefaultTableModel.getValueAt(i, 1).toString();
+			gebaeude = jDefaultTableModel.getValueAt(i, 2).toString();
+			raum = jDefaultTableModel.getValueAt(i, 3).toString();
 
 			System.out.println(bezeichnung + komponentenTyp + gebaeude + raum);
 
@@ -267,23 +236,23 @@ public class MainForm extends JFrame {
 
 		CSVReadWrite.writeCsvGeraete(komponentenListe);
 	}
-	
-	private void jCbGebaeudeItemChanged(ItemEvent e){
+
+	private void jCbGebaeudeItemChanged(ItemEvent e) {
 		readRooms();
 	}
 
 	private void jBtnKomponenteHinzufuegenActionPerformed(ActionEvent e) {
 		generateObject();
-		tableModel.setRowCount(0);
+		jDefaultTableModel.setRowCount(0);
 		fillTable();
 	}
 
 	private void deleteRow() {
 
-		int[] selectedRows = table.getSelectedRows();
+		int[] selectedRows = jTableKomponentenListe.getSelectedRows();
 		if (selectedRows.length > 0) {
 			for (int i = selectedRows.length - 1; i >= 0; i--) {
-				tableModel.removeRow(selectedRows[i]);
+				jDefaultTableModel.removeRow(selectedRows[i]);
 			}
 		}
 
@@ -297,7 +266,6 @@ public class MainForm extends JFrame {
 		String komponentenTyp = jCBKomponente.getSelectedItem().toString();
 		String gebaeude = jCBGebaeude.getSelectedItem().toString();
 		String raum = jCBRaumnummer.getSelectedItem().toString();
-
 		Komponente komponente = new Komponente(bezeichnung, komponentenTyp,
 				gebaeude, raum);
 
@@ -305,4 +273,6 @@ public class MainForm extends JFrame {
 
 		csvReaderWriter.writeCsvGeraete(komponentenListe);
 	}
+	
+	
 }
