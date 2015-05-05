@@ -1,6 +1,12 @@
 package netzwerkerfassung;
 
+/**
+*
+* @author Marco und Davis
+*/
+
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -14,61 +20,22 @@ public class CSVReadWrite {
 	
 	//Delimiter used in CSV file
 	private static final String COMMA_DELIMITER = ",";
-	private static final String NEW_LINE = "\n";
 		
 	//CSV file header
 //	private static final String FILE_HEADER = "Bezeichnung,KomponentenTyp,Geb‰ude,Raum";
 //	private static final String FILE_HEADER_BUILDING = "Bezeichnung, Straﬂe, Plz, Ort, R‰ume";
 
-	public CSVReadWrite() {
-		// TODO Auto-generated constructor stub
+	public CSVReadWrite()
+	{
+		
 	}
-
-//	main Methode zum testen.
-//public static void main(String[] args) {
 	
-//Gebaeude g1 = new Gebaeude("Gebaude1", "teststrasse", "64291", "Da", 3);
-//	Gebaeude g2 = new Gebaeude("Gebaude2", "teststrasse2", "64291", "Dar", 4);
-	
-//List<Gebaeude>gebaeude = new ArrayList<Gebaeude>();
-//	gebaeude.add(g1);
-//	gebaeude.add(g2);
-	
-//	writeCSVGebaeude(gebaeude);
-//gebaeude = readCSVGebaeude();
-//for(Gebaeude g: gebaeude){
-
-//	System.out.println(g.getBezeichnung() + " " + g.getStrasse() + " " + g.getPlz() + " " + g.getOrt() + " ");
-//	System.out.println("R‰ume:");
-//	for(int i=0; i<g.getRaeume().size(); i++){
-//		System.out.println("Raumnummer " + g.getListRaeume().get(i).getRaumnummer());
-//	}
-//	System.out.println("\n");
-	
-//}
-	
-//		// TODO Auto-generated method stub
-//		
-//		Komponente k1 = new PC("Acer PC", "PC", "103", "11111");
-//		Komponente k2 = new Notebook("HP Pavilion", "Notebook", "103", "11111");
-//		Komponente k3 = new Switch("Cisco C103", "Switch", "103", "11111");
-//		Komponente k4 = new Server("Cisco S220", "Server", "103", "11111");
-//		
-//		List<Komponente> komponenten = new ArrayList<Komponente>();
-//		komponenten.add(k1);
-//		komponenten.add(k2);
-//		komponenten.add(k3);
-//		komponenten.add(k4);
-//		
-//		writeCSV(komponenten);
-//		komponenten = readCSV();
-//		
-//		for (Komponente k : komponenten) 
-//		{
-//			System.out.println(k.getBezeichnung() + ", " + k.getKomponentenTyp() + ", " + k.getGebaeude() + ", " + k.getRaum());
-//		}
-//		
-//}
+	public boolean doesFileExist()
+	{
+		File f = new File("Gebaeude.csv");
+		return f.exists();
+		
+	}
 	
 	public static void writeCsvGeraete(List<Komponente> komponenten)
 	{
@@ -84,11 +51,8 @@ public class CSVReadWrite {
 //			fileWriter.append(FILE_HEADER.toString());
 //			
 //			//Add a new line separator after the header
-//			fileWriter.append(System.lineSeparator());
 //			
 
-			
-			//Write a new student object list to the CSV file
 			for (Komponente k : komponenten) 
 			{
 				fileWriter.append(String.valueOf(k.getBezeichnung()));
@@ -99,9 +63,7 @@ public class CSVReadWrite {
 				fileWriter.append(COMMA_DELIMITER);
 				fileWriter.append(String.valueOf(k.getRaum()));
 				fileWriter.append(System.lineSeparator());
-			}
-
-			
+			}			
 			
 			System.out.println("CSV file was created successfully !!!");
 			
