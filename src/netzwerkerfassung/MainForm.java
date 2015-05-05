@@ -21,6 +21,8 @@ import javax.swing.JTable;
 import javax.swing.JList;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 /**
  * Diese Klasse(und das restliche Programm) wurde aufgrund von Zeitmangel quick
@@ -93,6 +95,11 @@ public class MainForm extends JFrame {
 		contentPane.add(jLKomponente);
 
 		jCBGebaeude = new JComboBox();
+		jCBGebaeude.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				jCbGebaeudeItemChanged(e);
+			}
+		});
 		readBuildings();
 		
 		jCBRaumnummer = new JComboBox();
@@ -186,6 +193,7 @@ public class MainForm extends JFrame {
 		List<Raum> raumListe = new ArrayList<>();
 		
 		Gebaeude gebaeude =  (Gebaeude)jCBGebaeude.getSelectedItem();
+		
 			
 		raumListe = gebaeude.getListRaeume();
 		
@@ -258,6 +266,10 @@ public class MainForm extends JFrame {
 		}
 
 		CSVReadWrite.writeCsvGeraete(komponentenListe);
+	}
+	
+	private void jCbGebaeudeItemChanged(ItemEvent e){
+		readRooms();
 	}
 
 	private void jBtnKomponenteHinzufuegenActionPerformed(ActionEvent e) {
