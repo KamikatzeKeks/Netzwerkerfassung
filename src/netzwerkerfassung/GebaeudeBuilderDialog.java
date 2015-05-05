@@ -50,6 +50,7 @@ public class GebaeudeBuilderDialog extends JDialog {
 	
 	public GebaeudeBuilderDialog() {
 		setBounds(100, 100, 302, 459);
+		setModal(true);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -211,10 +212,17 @@ public class GebaeudeBuilderDialog extends JDialog {
 		
 	}
 	
-	
-	public static void main (String[] args){
-		GebaeudeBuilderDialog form = new GebaeudeBuilderDialog();
-		form.setVisible(true);
+	public void showDialog(){
+		
+		this.setVisible(true);
+		
+		
 	}
 	
+	
+//	public static void main (String[] args){
+//		GebaeudeBuilderDialog form = new GebaeudeBuilderDialog();
+//		form.setVisible(true);
+//	}
+//	
 }

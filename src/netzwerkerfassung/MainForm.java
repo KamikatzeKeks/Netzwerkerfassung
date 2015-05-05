@@ -53,6 +53,7 @@ public class MainForm extends JFrame {
 	private JTable jTableKomponentenListe;
 	private DefaultTableModel jDefaultTableModel;
 	private JScrollPane jScPaTableView;
+	private JButton jBtnGebaeudeVerwalten;
 
 	public MainForm() {
 
@@ -131,10 +132,11 @@ public class MainForm extends JFrame {
 			jBtnAuswahlLoeschen.addActionListener(e -> jBtnAuswahlLoeschenActionPerformed(e));
 
 			
-			JButton jBtnGebaeudeBearbeiten = new JButton(
-					"Geb\u00E4ude Bearbeiten");
-			jBtnGebaeudeBearbeiten.setBounds(470, 400, 168, 25);
-			contentPane.add(jBtnGebaeudeBearbeiten);
+			jBtnGebaeudeVerwalten = new JButton(
+					"Geb\u00E4ude verwalten");
+			jBtnGebaeudeVerwalten.setBounds(470, 400, 168, 25);
+			jBtnGebaeudeVerwalten.addActionListener(e-> jBtnGebaeudeVerwaltenActionPerformed(e));
+			contentPane.add(jBtnGebaeudeVerwalten);
 			
 		
 		
@@ -154,45 +156,12 @@ public class MainForm extends JFrame {
 		}
 	}
 
-	private void readBuildings() {
-		Object[] gebaeudeBezeichnungen = new Object[50];
-
-		int i = 0;
-		for (Gebaeude gebaeude : CSVReadWrite.readCSVGebaeude()) {
-
-			gebaeudeBezeichnungen[i] = gebaeude;
-			i++;
-		}
-		jCBGebaeude.setModel(new javax.swing.DefaultComboBoxModel(
-				gebaeudeBezeichnungen));
-	}
-
-	private void readRooms() {
-
-		List<Raum> raumListe = new ArrayList<>();
-
-		Gebaeude gebaeude = (Gebaeude) jCBGebaeude.getSelectedItem();
-
-		raumListe = gebaeude.getListRaeume();
-
-		jCBRaumnummer.setModel(new javax.swing.DefaultComboBoxModel(raumListe.toArray()));
-
-	}
-
-	private void fillTable() {
-
-		for (Komponente komponente : CSVReadWrite.readCSV()) {
-
-			String bezeichnung = komponente.getBezeichnung();
-			String komponentenTyp = komponente.getKomponentenTyp();
-			String gebaeude = komponente.getGebaeude();
-			String raum = komponente.getRaum();
-
-			Object[] data = { bezeichnung, komponentenTyp, gebaeude, raum };
-
-			jDefaultTableModel.addRow(data);
-		}
-
+	
+	private void jBtnGebaeudeVerwaltenActionPerformed(ActionEvent e){
+		GebaeudeBuilderDialog dialog = new GebaeudeBuilderDialog();
+		dialog.showDialog();
+		readBuildings();
+		
 	}
 
 	private void jBtnAuswahlLoeschenActionPerformed(ActionEvent e) {
@@ -273,6 +242,48 @@ public class MainForm extends JFrame {
 
 		CSVReadWrite.writeCsvGeraete(komponentenListe);
 	}
+	
+	private void readBuildings() {
+		Object[] gebaeudeBezeichnungen = new Object[50];
+
+		int i = 0;
+		for (Gebaeude gebaeude : CSVReadWrite.readCSVGebaeude()) {
+
+			gebaeudeBezeichnungen[i] = gebaeude;
+			i++;
+		}
+		jCBGebaeude.setModel(new javax.swing.DefaultComboBoxModel(
+				gebaeudeBezeichnungen));
+	}
+
+	private void readRooms() {
+
+		List<Raum> raumListe = new ArrayList<>();
+
+		Gebaeude gebaeude = (Gebaeude) jCBGebaeude.getSelectedItem();
+
+		raumListe = gebaeude.getListRaeume();
+
+		jCBRaumnummer.setModel(new javax.swing.DefaultComboBoxModel(raumListe.toArray()));
+
+	}
+
+	private void fillTable() {
+
+		for (Komponente komponente : CSVReadWrite.readCSV()) {
+
+			String bezeichnung = komponente.getBezeichnung();
+			String komponentenTyp = komponente.getKomponentenTyp();
+			String gebaeude = komponente.getGebaeude();
+			String raum = komponente.getRaum();
+
+			Object[] data = { bezeichnung, komponentenTyp, gebaeude, raum };
+
+			jDefaultTableModel.addRow(data);
+		}
+
+	}
+	
 	
 	
 }
