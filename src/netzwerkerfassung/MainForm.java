@@ -100,7 +100,7 @@ public class MainForm extends JFrame {
 		
 		
 			jCBGebaeude = new JComboBox<>();
-			//readBuildings();
+			readBuildings();
 			jCBGebaeude.addItemListener(e -> jCbGebaeudeItemChanged(e));
 
 
