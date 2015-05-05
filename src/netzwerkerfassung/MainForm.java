@@ -204,6 +204,16 @@ public class MainForm extends JFrame {
 		aenderungenUebernehmen();
 
 	}
+	
+	private void jBtnKomponenteHinzufuegenActionPerformed(ActionEvent e) {
+		generateObject();
+		jDefaultTableModel.setRowCount(0);
+		fillTable();
+	}
+	
+	private void jCbGebaeudeItemChanged(ItemEvent e) {
+		readRooms();
+	}
 
 	private void aenderungenUebernehmen() {
 		String bezeichnung;
@@ -237,16 +247,6 @@ public class MainForm extends JFrame {
 		CSVReadWrite.writeCsvGeraete(komponentenListe);
 	}
 
-	private void jCbGebaeudeItemChanged(ItemEvent e) {
-		readRooms();
-	}
-
-	private void jBtnKomponenteHinzufuegenActionPerformed(ActionEvent e) {
-		generateObject();
-		jDefaultTableModel.setRowCount(0);
-		fillTable();
-	}
-
 	private void deleteRow() {
 
 		int[] selectedRows = jTableKomponentenListe.getSelectedRows();
@@ -271,7 +271,7 @@ public class MainForm extends JFrame {
 
 		System.out.println("hinzugefügt: " + komponentenListe.add(komponente));
 
-		csvReaderWriter.writeCsvGeraete(komponentenListe);
+		CSVReadWrite.writeCsvGeraete(komponentenListe);
 	}
 	
 	
