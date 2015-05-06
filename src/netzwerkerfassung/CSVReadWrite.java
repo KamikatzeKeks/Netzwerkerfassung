@@ -30,6 +30,13 @@ public class CSVReadWrite {
 		
 	}
 	
+	/**
+	 * Überprüft ob eine Datei existiert
+	 * 
+	 * @author Brian Korduan
+	 * @param String fileName
+	 * @return boolean
+	 */
 	public static boolean doesFileExist(String fileName)
 	{
 		File csvFile = new File(fileName);
@@ -43,7 +50,13 @@ public class CSVReadWrite {
 	}
 	
 
-	
+	/**
+	 * erstellt eine Datei
+	 * 
+	 * @author Brian Korduan
+	 * @param String fileName
+	 * @return void
+	 */
 	public static void createFile(String fileName){
 		new File(fileName);
 		
@@ -104,13 +117,6 @@ public class CSVReadWrite {
 		try {
 			fileWriter = new FileWriter("Gebaeude.csv");
 
-			//Write the CSV file header
-	//		fileWriter.append(FILE_HEADER_BUILDING.toString());
-			
-			//Add a new line separator after the header
-			//fileWriter.append(System.lineSeparator());
-			
-	
 			for (Gebaeude g : gebaeude) 
 			{
 				fileWriter.append(String.valueOf(g.getBezeichnung()));
