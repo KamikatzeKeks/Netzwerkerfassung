@@ -195,13 +195,17 @@ public class GebaeudeBuilderDialog extends JDialog {
 	
 	private void jBtnGebaeudeHinzufuegenActionPerformed(ActionEvent e){
 	List<Gebaeude> gebaeudeListe = new ArrayList<>();
-	
+	try{
 	gebaeudeListe = CSVReadWrite.readCSVGebaeude();
-	
+	}catch(Exception ex){
+		
+ex.printStackTrace();
+		
+	}finally{
 	gebaeudeListe.add( new Gebaeude(jTfGebaeudeBezeichnung.getText(),jTfStrasse.getText(),jTFPostleitZahl.getText(),jTFOrt.getText(),(int)jSpiRaumAnzahl.getValue()));
 	
 	CSVReadWrite.writeCSVGebaeude(gebaeudeListe);
-	
+	}
 	}
 	
 	private void jBtnOkActionPerformed(ActionEvent e){

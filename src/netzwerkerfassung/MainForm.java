@@ -244,6 +244,8 @@ public class MainForm extends JFrame {
 	}
 	
 	private void readBuildings() {
+		
+		try{
 		Object[] gebaeudeBezeichnungen = new Object[50];
 
 		int i = 0;
@@ -254,9 +256,14 @@ public class MainForm extends JFrame {
 		}
 		jCBGebaeude.setModel(new javax.swing.DefaultComboBoxModel(
 				gebaeudeBezeichnungen));
+		}catch(Exception e){
+			CSVReadWrite.createFiles();
+
+		}
 	}
 
 	private void readRooms() {
+		try{
 
 		List<Raum> raumListe = new ArrayList<>();
 
@@ -265,7 +272,10 @@ public class MainForm extends JFrame {
 		raumListe = gebaeude.getListRaeume();
 
 		jCBRaumnummer.setModel(new javax.swing.DefaultComboBoxModel(raumListe.toArray()));
-
+		}catch(Exception e){
+			CSVReadWrite.createFiles();
+			
+		}
 	}
 
 	private void fillTable() {

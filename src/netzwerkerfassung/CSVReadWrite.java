@@ -30,11 +30,24 @@ public class CSVReadWrite {
 		
 	}
 	
-	public boolean doesFileExist()
+	public boolean doesFileExist(String fileName)
 	{
-		File f = new File("Gebaeude.csv");
-		return f.exists();
+		File csvFile = new File(fileName);
 		
+		if(csvFile.exists() == true ){
+			return true;
+		}else{
+			return false;
+		}
+		
+	}
+	
+
+	
+	public static void createFile(String fileName){
+		new File(fileName);
+		
+
 	}
 	
 	public static void writeCsvGeraete(List<Komponente> komponenten)
