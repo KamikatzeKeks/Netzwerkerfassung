@@ -6,11 +6,13 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JSpinner;
 
+import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -23,7 +25,7 @@ import javax.swing.JTable;
 
 /**
  * 
- * @author Brian Korduan 
+ * @author Brian Korduan
  *
  */
 
@@ -47,7 +49,6 @@ public class GebaeudeBuilderDialog extends JDialog {
 	private JButton jBtnOk;
 	private JButton jBtnCancel;
 
-	
 	public GebaeudeBuilderDialog() {
 		setBounds(100, 100, 400, 500);
 		setModal(true);
@@ -55,10 +56,12 @@ public class GebaeudeBuilderDialog extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
-		gbl_contentPanel.columnWidths = new int[]{250, 0};
-		gbl_contentPanel.rowHeights = new int[]{16, 22, 16, 22, 21, 0, 16, 22, 16, 22, 0, 0};
-		gbl_contentPanel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_contentPanel.columnWidths = new int[] { 250, 0 };
+		gbl_contentPanel.rowHeights = new int[] { 16, 22, 16, 22, 21, 0, 16,
+				22, 16, 22, 0, 0 };
+		gbl_contentPanel.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
+		gbl_contentPanel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
+				0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
 		contentPanel.setLayout(gbl_contentPanel);
 		{
 			jLGebaeudeBezeichnung = new JLabel("Geb\u00E4ude Bezeichnung:");
@@ -69,7 +72,7 @@ public class GebaeudeBuilderDialog extends JDialog {
 			gbc_jLGebaeudeBezeichnung.gridy = 0;
 			contentPanel.add(jLGebaeudeBezeichnung, gbc_jLGebaeudeBezeichnung);
 		}
-		
+
 		jTfGebaeudeBezeichnung = new JTextField();
 		GridBagConstraints gbc_jTfGebaeudeBezeichnung = new GridBagConstraints();
 		gbc_jTfGebaeudeBezeichnung.anchor = GridBagConstraints.NORTH;
@@ -89,7 +92,7 @@ public class GebaeudeBuilderDialog extends JDialog {
 			gbc_jLStrasse.gridy = 2;
 			contentPanel.add(jLStrasse, gbc_jLStrasse);
 		}
-		
+
 		jTfStrasse = new JTextField();
 		GridBagConstraints gbc_jTfStrasse = new GridBagConstraints();
 		gbc_jTfStrasse.anchor = GridBagConstraints.NORTH;
@@ -108,7 +111,7 @@ public class GebaeudeBuilderDialog extends JDialog {
 			gbc_jLPlz.gridy = 4;
 			contentPanel.add(jLPlz, gbc_jLPlz);
 		}
-		
+
 		jTFPostleitZahl = new JTextField();
 		GridBagConstraints gbc_jTFPostleitZahl = new GridBagConstraints();
 		gbc_jTFPostleitZahl.anchor = GridBagConstraints.SOUTH;
@@ -148,7 +151,11 @@ public class GebaeudeBuilderDialog extends JDialog {
 			contentPanel.add(jLRaumanzahl, gbc_jLRaumanzahl);
 		}
 		{
+			
+		}
+		{
 			jSpiRaumAnzahl = new JSpinner();
+			jSpiRaumAnzahl.setModel(new SpinnerNumberModel(1, 1,99999, 1));
 			GridBagConstraints gbc_jSpiRaumAnzahl = new GridBagConstraints();
 			gbc_jSpiRaumAnzahl.insets = new Insets(0, 0, 5, 0);
 			gbc_jSpiRaumAnzahl.anchor = GridBagConstraints.NORTHWEST;
@@ -174,7 +181,8 @@ public class GebaeudeBuilderDialog extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				jBtnGebaeudeHinzufuegen = new JButton("Gebäude hinzufügen");
-				jBtnGebaeudeHinzufuegen.addActionListener(e -> jBtnGebaeudeHinzufuegenActionPerformed(e));
+				jBtnGebaeudeHinzufuegen
+						.addActionListener(e -> jBtnGebaeudeHinzufuegenActionPerformed(e));
 				buttonPane.add(jBtnGebaeudeHinzufuegen);
 			}
 			{
@@ -192,45 +200,45 @@ public class GebaeudeBuilderDialog extends JDialog {
 			}
 		}
 	}
-	
-	private void jBtnGebaeudeHinzufuegenActionPerformed(ActionEvent e){
-	List<Gebaeude> gebaeudeListe = new ArrayList<>();
-	try{
-	gebaeudeListe = CSVReadWrite.readCSVGebaeude();
-	}catch(Exception ex){
-		if(CSVReadWrite.doesFileExist("Gebaeude.csv")== true){
-			System.out.println("Gebaeude.csv existiert bereits");
-		}else{
-		CSVReadWrite.createFile("Gebaeude.csv");
+
+	private void jBtnGebaeudeHinzufuegenActionPerformed(ActionEvent e) {
+		List<Gebaeude> gebaeudeListe = new ArrayList<>();
+		try {
+
+			gebaeudeListe = CSVReadWrite.readCSVGebaeude();
+
+		} catch (Exception ex) {
+
+			if (CSVReadWrite.doesFileExist("Gebaeude.csv") == true) {
+				System.out.println("Gebaeude.csv existiert bereits");
+			} else {
+				CSVReadWrite.createFile("Gebaeude.csv");
+			}
+
+			// ex.printStackTrace();
+
+		} finally {
+			gebaeudeListe.add(new Gebaeude(jTfGebaeudeBezeichnung.getText(),
+					jTfStrasse.getText(), jTFPostleitZahl.getText(), jTFOrt
+							.getText(), (int) jSpiRaumAnzahl.getValue()));
+
+			CSVReadWrite.writeCSVGebaeude(gebaeudeListe);
 		}
-ex.printStackTrace();
-		
-	}finally{
-	gebaeudeListe.add( new Gebaeude(jTfGebaeudeBezeichnung.getText(),jTfStrasse.getText(),jTFPostleitZahl.getText(),jTFOrt.getText(),(int)jSpiRaumAnzahl.getValue()));
-	
-	CSVReadWrite.writeCSVGebaeude(gebaeudeListe);
 	}
+
+	private void jBtnOkActionPerformed(ActionEvent e) {
+
 	}
-	
-	private void jBtnOkActionPerformed(ActionEvent e){
-		
+
+	private void jBtnCancelActionPerformed(ActionEvent e) {
+
 	}
-	
-	private void jBtnCancelActionPerformed(ActionEvent e){
-		
-	}
-	
-	public void showDialog(){
-		
+
+	public void showDialog() {
+
 		this.setVisible(true);
-		
-		
+
 	}
-	
-	
-//	public static void main (String[] args){
-//		GebaeudeBuilderDialog form = new GebaeudeBuilderDialog();
-//		form.setVisible(true);
-//	}
-//	
+
+
 }
