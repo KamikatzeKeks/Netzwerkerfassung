@@ -3,11 +3,13 @@ package netzwerkerfassung;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
+import javax.swing.DebugGraphics;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JSpinner;
@@ -43,11 +45,13 @@ public class GebaeudeBuilderDialog extends JDialog {
 	private JTextField jTFOrt;
 	private JSpinner jSpiRaumAnzahl;
 	private JScrollPane scrollPane;
-	private JTable table;
+	private JTable jTableGebaeudeListe;
 	private JPanel buttonPane;
 	private JButton jBtnGebaeudeHinzufuegen;
 	private JButton jBtnOk;
 	private JButton jBtnCancel;
+	private Object col[] = { "Bezeichnung", "Straﬂe", "PLZ", "Ort" };
+	private DefaultTableModel jDefaultTableModel = new DefaultTableModel(col, 0);
 
 	public GebaeudeBuilderDialog() {
 		setBounds(100, 100, 400, 500);
@@ -164,15 +168,18 @@ public class GebaeudeBuilderDialog extends JDialog {
 			contentPanel.add(jSpiRaumAnzahl, gbc_jSpiRaumAnzahl);
 		}
 		{
-			scrollPane = new JScrollPane();
+			jTableGebaeudeListe = new JTable(jDefaultTableModel);
+			fillTable();
+		}
+		{
+			scrollPane = new JScrollPane(jTableGebaeudeListe);
 			GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 			gbc_scrollPane.fill = GridBagConstraints.BOTH;
 			gbc_scrollPane.gridx = 0;
 			gbc_scrollPane.gridy = 10;
 			contentPanel.add(scrollPane, gbc_scrollPane);
 			{
-				table = new JTable();
-				scrollPane.setViewportView(table);
+			//	scrollPane.setViewportView(table);
 			}
 		}
 		{
@@ -223,6 +230,7 @@ public class GebaeudeBuilderDialog extends JDialog {
 							.getText(), (int) jSpiRaumAnzahl.getValue()));
 
 			CSVReadWrite.writeCSVGebaeude(gebaeudeListe);
+			fillTable();
 		}
 	}
 
@@ -237,6 +245,19 @@ public class GebaeudeBuilderDialog extends JDialog {
 	public void showDialog() {
 
 		this.setVisible(true);
+
+	}
+	
+	private void fillTable() {
+		
+		jDefaultTableModel.setRowCount(0);
+
+		for (Gebaeude gebaeude : CSVReadWrite.readCSVGebaeude()) {
+		
+			Object[] data = { gebaeude.getBezeichnung(), gebaeude.getStrasse(), gebaeude.getPlz(),gebaeude.getOrt()};
+
+			jDefaultTableModel.addRow(data);
+		}
 
 	}
 
