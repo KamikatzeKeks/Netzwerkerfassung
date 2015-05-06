@@ -30,7 +30,7 @@ public class CSVReadWrite {
 		
 	}
 	
-	public boolean doesFileExist(String fileName)
+	public static boolean doesFileExist(String fileName)
 	{
 		File csvFile = new File(fileName);
 		
@@ -108,7 +108,7 @@ public class CSVReadWrite {
 	//		fileWriter.append(FILE_HEADER_BUILDING.toString());
 			
 			//Add a new line separator after the header
-			fileWriter.append(System.lineSeparator());
+			//fileWriter.append(System.lineSeparator());
 			
 	
 			for (Gebaeude g : gebaeude) 

@@ -257,7 +257,6 @@ public class MainForm extends JFrame {
 		jCBGebaeude.setModel(new javax.swing.DefaultComboBoxModel(
 				gebaeudeBezeichnungen));
 		}catch(Exception e){
-			CSVReadWrite.createFiles();
 
 		}
 	}
@@ -273,7 +272,6 @@ public class MainForm extends JFrame {
 
 		jCBRaumnummer.setModel(new javax.swing.DefaultComboBoxModel(raumListe.toArray()));
 		}catch(Exception e){
-			CSVReadWrite.createFiles();
 			
 		}
 	}

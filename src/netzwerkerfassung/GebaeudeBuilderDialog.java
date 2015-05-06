@@ -198,7 +198,11 @@ public class GebaeudeBuilderDialog extends JDialog {
 	try{
 	gebaeudeListe = CSVReadWrite.readCSVGebaeude();
 	}catch(Exception ex){
-		
+		if(CSVReadWrite.doesFileExist("Gebaeude.csv")== true){
+			System.out.println("Gebaeude.csv existiert bereits");
+		}else{
+		CSVReadWrite.createFile("Gebaeude.csv");
+		}
 ex.printStackTrace();
 		
 	}finally{
