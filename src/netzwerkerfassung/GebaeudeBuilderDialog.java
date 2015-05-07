@@ -258,6 +258,9 @@ public class GebaeudeBuilderDialog extends JDialog {
 
 	private void jBtnOkActionPerformed(ActionEvent e) {
 
+		aenderungenUebernehmen();
+		this.dispose();
+		
 	}
 
 	private void jBtnCancelActionPerformed(ActionEvent e) {
