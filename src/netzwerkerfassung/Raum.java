@@ -6,7 +6,7 @@ import java.util.List;
 public class Raum {
 
 	int raumnummer;
-	List<Komponente>komponenten = new ArrayList<Komponente>();
+	private List<Komponente>komponenten = new ArrayList<Komponente>();
 	
 	public Raum(int raumnummer ) {
 		// TODO Auto-generated constructor stub
@@ -14,6 +14,24 @@ public class Raum {
 		
 	}
 	
+	public Raum(int raumnummer, List<Komponente> komponenten) {
+		// TODO Auto-generated constructor stub
+		this.raumnummer = raumnummer;
+		this.komponenten = komponenten;
+	}	
+	
+	public List<Komponente> getKomponenten() {
+		return komponenten;
+	}
+
+	public void setKomponenten(List<Komponente> komponenten) {
+		this.komponenten = komponenten;
+	}
+
+	public void setRaumnummer(int raumnummer) {
+		this.raumnummer = raumnummer;
+	}
+
 	public void addKomponente(Komponente k)
 	{
 		komponenten.add(k);

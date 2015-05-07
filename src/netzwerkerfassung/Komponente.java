@@ -12,6 +12,36 @@ import java.util.Date;
  * @author Brian
  */
 public class Komponente {
+	
+	public String bezeichnung;
+    private int inventarNummer;
+    private String beschreibung;
+    private Date beschaffungsDatum = new Date();
+    private Date wartungsDatum = new Date();
+    private String komponentenTyp;
+    private String raum;
+    private String gebaeude;
+    
+	
+	public Komponente(String bezeichnung, String komponentenTyp, String gebaeude, String raum){
+    	this.bezeichnung = bezeichnung;
+    	this.komponentenTyp = komponentenTyp;
+    	this.gebaeude = gebaeude;
+    	this.raum = raum;
+    	
+    }
+	
+	public Komponente(String bezeichnung, String gebaeude, String raum)
+    {
+    	this.bezeichnung = bezeichnung;
+    	this.gebaeude = gebaeude;
+    	this.raum = raum;
+    }
+	
+	public Komponente(String bezeichnung, String komponentenTyp){
+		this.bezeichnung = bezeichnung;
+    	this.komponentenTyp = komponentenTyp;
+	}
 
     public String getGebaeude() {
 		return gebaeude;
@@ -28,22 +58,6 @@ public class Komponente {
 	public void setRaum(String raum) {
 		this.raum = raum;
 	}
-
-	public String bezeichnung;
-    private int inventarNummer;
-    private String beschreibung;
-    private Date beschaffungsDatum = new Date();
-    private Date wartungsDatum = new Date();
-    private String gebaeude;
-    private String raum;
-    private String komponentenTyp;
-    
-    public Komponente(String bezeichnung, String gebaeude, String raum)
-    {
-    	this.bezeichnung = bezeichnung;
-    	this.gebaeude = gebaeude;
-    	this.raum = raum;
-    }
     
     public Date getBeschaffungsDatum() {
 		return beschaffungsDatum;
@@ -68,14 +82,6 @@ public class Komponente {
 	public void setKomponentenTyp(String komponentenTyp) {
 		this.komponentenTyp = komponentenTyp;
 	}
-
-	public Komponente(String bezeichnung, String komponentenTyp, String gebaeude, String raum){
-    	this.bezeichnung = bezeichnung;
-    	this.komponentenTyp = komponentenTyp;
-    	this.gebaeude = gebaeude;
-    	this.raum = raum;
-    	
-    }
 
 	public String getBezeichnung() {
 		return bezeichnung;
