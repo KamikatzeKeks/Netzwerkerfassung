@@ -19,6 +19,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,11 +51,13 @@ public class GebaeudeBuilderDialog extends JDialog {
 	private JButton jBtnGebaeudeHinzufuegen;
 	private JButton jBtnOk;
 	private JButton jBtnCancel;
-	private Object col[] = { "Bezeichnung", "Straße", "PLZ", "Ort" };
+	private Object col[] = { "Bezeichnung", "Straße", "PLZ", "Ort",
+			"RaumAnzahl" };
 	private DefaultTableModel jDefaultTableModel = new DefaultTableModel(col, 0);
+	private JButton jBtnLoeschen;
 
 	public GebaeudeBuilderDialog() {
-		setBounds(100, 100, 400, 500);
+		setBounds(100, 100, 514, 500);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -155,11 +158,11 @@ public class GebaeudeBuilderDialog extends JDialog {
 			contentPanel.add(jLRaumanzahl, gbc_jLRaumanzahl);
 		}
 		{
-			
+
 		}
 		{
 			jSpiRaumAnzahl = new JSpinner();
-			jSpiRaumAnzahl.setModel(new SpinnerNumberModel(1, 1,99999, 1));
+			jSpiRaumAnzahl.setModel(new SpinnerNumberModel(1, 1, 99999, 1));
 			GridBagConstraints gbc_jSpiRaumAnzahl = new GridBagConstraints();
 			gbc_jSpiRaumAnzahl.insets = new Insets(0, 0, 5, 0);
 			gbc_jSpiRaumAnzahl.anchor = GridBagConstraints.NORTHWEST;
@@ -179,7 +182,7 @@ public class GebaeudeBuilderDialog extends JDialog {
 			gbc_scrollPane.gridy = 10;
 			contentPanel.add(scrollPane, gbc_scrollPane);
 			{
-			//	scrollPane.setViewportView(table);
+				// scrollPane.setViewportView(table);
 			}
 		}
 		{
@@ -190,6 +193,12 @@ public class GebaeudeBuilderDialog extends JDialog {
 				jBtnGebaeudeHinzufuegen = new JButton("Gebäude hinzufügen");
 				jBtnGebaeudeHinzufuegen
 						.addActionListener(e -> jBtnGebaeudeHinzufuegenActionPerformed(e));
+				{
+					jBtnLoeschen = new JButton("Löschen");
+					jBtnLoeschen
+							.addActionListener(e -> jBtnLoeschenActionPerformed(e));
+					buttonPane.add(jBtnLoeschen);
+				}
 				buttonPane.add(jBtnGebaeudeHinzufuegen);
 			}
 			{
@@ -234,6 +243,19 @@ public class GebaeudeBuilderDialog extends JDialog {
 		}
 	}
 
+	private void jBtnLoeschenActionPerformed(ActionEvent e) {
+
+		int[] selectedRows = jTableGebaeudeListe.getSelectedRows();
+		if (selectedRows.length > 0) {
+			for (int i = selectedRows.length - 1; i >= 0; i--) {
+				jDefaultTableModel.removeRow(selectedRows[i]);
+			}
+		}
+
+		aenderungenUebernehmen();
+
+	}
+
 	private void jBtnOkActionPerformed(ActionEvent e) {
 
 	}
@@ -247,19 +269,44 @@ public class GebaeudeBuilderDialog extends JDialog {
 		this.setVisible(true);
 
 	}
-	
+
 	private void fillTable() {
-		
+
 		jDefaultTableModel.setRowCount(0);
 
 		for (Gebaeude gebaeude : CSVReadWrite.readCSVGebaeude()) {
-		
-			Object[] data = { gebaeude.getBezeichnung(), gebaeude.getStrasse(), gebaeude.getPlz(),gebaeude.getOrt()};
+			int counter = 0;
+			for( Raum raum : gebaeude.getListRaeume()){
+				counter++;
+			}
+
+			Object[] data = { gebaeude.getBezeichnung(), gebaeude.getStrasse(),
+					gebaeude.getPlz(), gebaeude.getOrt(),counter
+					};
 
 			jDefaultTableModel.addRow(data);
 		}
 
 	}
 
+	private void aenderungenUebernehmen() {
+	
+		List<Gebaeude> gebaeudeListe = new ArrayList<>();
+		// CSVReadWrite.deleteFile("Gebaeude.csv");
+
+		for (int i = 0; i < jDefaultTableModel.getRowCount(); i++) {
+
+			gebaeudeListe.add(new Gebaeude(jDefaultTableModel.getValueAt(i, 0)
+					.toString(),
+					jDefaultTableModel.getValueAt(i, 1).toString(),
+					jDefaultTableModel.getValueAt(i, 2).toString(),
+					jDefaultTableModel.getValueAt(i, 3).toString(),
+					(int) jDefaultTableModel.getValueAt(i, 4)));
+
+
+		}
+
+		CSVReadWrite.writeCSVGebaeude(gebaeudeListe);
+	}
 
 }

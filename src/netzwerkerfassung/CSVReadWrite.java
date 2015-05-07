@@ -63,6 +63,11 @@ public class CSVReadWrite {
 
 	}
 	
+	public static void deleteFile(String fileName){
+		File file = new File(fileName);
+		file.delete();
+	}
+	
 	public static void writeCsvGeraete(List<Komponente> komponenten)
 	{
 		
