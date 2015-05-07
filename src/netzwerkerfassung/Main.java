@@ -1,5 +1,7 @@
 package netzwerkerfassung;
 
+import gui.MainForm;
+
 import java.util.ArrayList;
 import java.util.List;
 
