@@ -222,8 +222,7 @@ public class CSVReadWrite {
 			}
 		} 
 		catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Komponenten.csv nicht vorhanden");
 		}
 		
 		List<Komponente> komponenten = new ArrayList<Komponente>();
@@ -303,8 +302,7 @@ public class CSVReadWrite {
 			}
 		} 
 		catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		System.out.println("Gebaeude.csv nicht vorhanden");
 		}
 		
 		List<Gebaeude> gebaeude = new ArrayList<Gebaeude>();

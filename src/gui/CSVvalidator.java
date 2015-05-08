@@ -1,8 +1,5 @@
 package gui;
 
-/*
- * @autor Brian Korduan
- */
 import gebaeude.Gebaeude;
 
 import java.util.ArrayList;

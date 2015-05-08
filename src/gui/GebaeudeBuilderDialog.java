@@ -248,7 +248,7 @@ public class GebaeudeBuilderDialog extends JDialog {
 		} finally {
 			gebaeudeListe.add(new Gebaeude(jTfGebaeudeBezeichnung.getText(),
 					jTfStrasse.getText(), jTFPostleitZahl.getText(), jTFOrt
-							.getText(), (int) jSpiRaumAnzahl.getValue()));
+							.getText(), Integer.parseInt( jSpiRaumAnzahl.getValue().toString())));
 
 			CSVReadWrite.writeCSVGebaeude(gebaeudeListe);
 			fillTable();
@@ -329,7 +329,7 @@ public class GebaeudeBuilderDialog extends JDialog {
 					jDefaultTableModel.getValueAt(i, 1).toString(),
 					jDefaultTableModel.getValueAt(i, 2).toString(),
 					jDefaultTableModel.getValueAt(i, 3).toString(),
-					(int) jDefaultTableModel.getValueAt(i, 4)));
+					Integer.parseInt(jDefaultTableModel.getValueAt(i, 4).toString())));
 		}
 	
 	CSVReadWrite.writeCSVGebaeude(gebaeudeListe);
