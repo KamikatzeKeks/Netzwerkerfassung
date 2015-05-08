@@ -1,9 +1,10 @@
 package readerWriter;
 
 /**
-* CSVReadWrite.java
+* Klasse CSVReadWrite.java
 * Liest und schreibt Daten aus den CSV Dateien
 * data.csv (Komponenten) sowie Gebäude.csv (Gebäude und Räume)
+* 
 * @author Davis Fröse & Marco D'Addona
 * @date	April/Mai 2015
 */
@@ -23,8 +24,6 @@ import java.util.List;
 import komponenten.Komponente;
 
 public class CSVReadWrite {
-	
-	private static int count = 1;
 	
 	//Delimiter used in CSV file
 	private static final String COMMA_DELIMITER = ",";
@@ -162,6 +161,7 @@ public class CSVReadWrite {
 				fileWriter.append(COMMA_DELIMITER);
 				
 				int count = 0;
+				// Raum-Objekte werden durch [ ] in der CSV Datei markiert
 				for(Raum r:g.getRaeume()) {
 					System.out.println(g.getAnzRaeume());
 					if(count == 0) {
@@ -281,30 +281,29 @@ public class CSVReadWrite {
 			{
 				List<String> lines = new ArrayList<String>();
 				List<Raum>raeume = new ArrayList<Raum>();
-				//splittedLine = readline.split(",");
 				
 				splittedLine = readline.split(",");
-				//int anz_raeume = 0;
-				
+
 				if(readline.contains("[")) {
 				
-					String countraeume = readline.substring(readline.indexOf("[")+1, readline.indexOf("]"));
+					//String mit den Räumen
+					String string_raeume = readline.substring(readline.indexOf("[")+1, readline.indexOf("]"));
 
-					String[] split_raeume = countraeume.split(",");
+					String[] split_raeume = string_raeume.split(",");
 					
+					//Generierung der Raum Objekte und abspeichern in eine ArrayList
 					for(int i = 0; i<split_raeume.length; i++) {
 						raeume.add(new Raum(Integer.parseInt(split_raeume[i])));
 					}
-					
-					
-					
-				}
 
+				}
+				
+				//Alles ausser die Räume in die ArrayList lines speichern
 				for (int x = 0; x <= 3; x++)
 				{
 					lines.add(splittedLine[x]);
 				}
-				//System.out.println(count_raeume.toString());
+				//Räume in die ArrayList lines speichern
 				for(int y = 0; y<raeume.size(); y++) {
 					Integer intRaeume = new Integer(raeume.get(y).getRaumnummer());
 					lines.add(intRaeume.toString());
