@@ -177,6 +177,8 @@ public class GebaeudeBuilderDialog extends JDialog {
 		}
 		{
 			jTableGebaeudeListe = new JTable(jDefaultTableModel);
+			jTableGebaeudeListe.setColumnSelectionAllowed(false);
+			jTableGebaeudeListe.setDragEnabled(false);
 			fillTable();
 		}
 		{
@@ -187,8 +189,7 @@ public class GebaeudeBuilderDialog extends JDialog {
 			gbc_scrollPane.gridy = 10;
 			contentPanel.add(scrollPane, gbc_scrollPane);
 			{
-				// scrollPane.setViewportView(table);
-			}
+ 			}
 		}
 		{
 			buttonPane = new JPanel();
@@ -207,15 +208,15 @@ public class GebaeudeBuilderDialog extends JDialog {
 				buttonPane.add(jBtnGebaeudeHinzufuegen);
 			}
 			{
-				jBtnOk = new JButton("OK");
-				jBtnOk.setActionCommand("OK");
+				jBtnOk = new JButton("Übernehmen");
+				jBtnOk.setActionCommand("Übernehmen");
 				jBtnOk.addActionListener(e -> jBtnOkActionPerformed(e));
 				buttonPane.add(jBtnOk);
 				getRootPane().setDefaultButton(jBtnOk);
 			}
 			{
-				jBtnCancel = new JButton("Cancel");
-				jBtnCancel.setActionCommand("Cancel");
+				jBtnCancel = new JButton("Abbrechen");
+				jBtnCancel.setActionCommand("Abbrechen");
 				jBtnCancel.addActionListener(e -> jBtnCancelActionPerformed(e));
 				buttonPane.add(jBtnCancel);
 			}
@@ -236,7 +237,7 @@ public class GebaeudeBuilderDialog extends JDialog {
 				CSVReadWrite.createFile("Gebaeude.csv");
 			}
 
-			// ex.printStackTrace();
+			 ex.printStackTrace();
 
 		} finally {
 			gebaeudeListe.add(new Gebaeude(jTfGebaeudeBezeichnung.getText(),
@@ -257,7 +258,7 @@ public class GebaeudeBuilderDialog extends JDialog {
 			}
 		}
 
-		aenderungenUebernehmen();
+//		aenderungenUebernehmen();
 
 	}
 
