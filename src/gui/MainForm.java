@@ -234,7 +234,8 @@ public class MainForm extends JFrame {
 
 		}
 	}
-
+	
+	
 	private void jBtnGebaeudeVerwaltenActionPerformed(ActionEvent e) {
 		GebaeudeBuilderDialog dialog = new GebaeudeBuilderDialog();
 		dialog.showDialog();
@@ -246,8 +247,13 @@ public class MainForm extends JFrame {
 	}
 
 	private void jBtnAuswahlLoeschenActionPerformed(ActionEvent e) {
-
-		deleteRow();
+		int[] selectedRows = jTableKomponentenListe.getSelectedRows();
+		if (selectedRows.length > 0) {
+			for (int i = selectedRows.length - 1; i >= 0; i--) {
+				jDefaultTableModel.removeRow(selectedRows[i]);
+			}
+		}
+		aenderungenUebernehmen();
 	}
 
 	private void jBtnAenderungenUebernehmenActionPerformed(ActionEvent e) {
@@ -264,6 +270,11 @@ public class MainForm extends JFrame {
 	private void jCbGebaeudeItemChanged(ItemEvent e) {
 		readRooms();
 	}
+	
+	/**
+	 * Liest alle EInträge aus der Tabelle und speichert sie in der CSV 
+	 * 
+	 */
 
 	private void aenderungenUebernehmen() {
 		List<Komponente> liste = new ArrayList<>();
@@ -279,18 +290,7 @@ public class MainForm extends JFrame {
 
 		CSVReadWrite.writeCsvGeraete(liste);
 	}
-
-	private void deleteRow() {
-
-		int[] selectedRows = jTableKomponentenListe.getSelectedRows();
-		if (selectedRows.length > 0) {
-			for (int i = selectedRows.length - 1; i >= 0; i--) {
-				jDefaultTableModel.removeRow(selectedRows[i]);
-			}
-		}
-		aenderungenUebernehmen();
-	}
-
+	
 	private void addKomponenteToList() {
 
 		List<Komponente> komponentenListe = new ArrayList<>();
@@ -303,6 +303,11 @@ public class MainForm extends JFrame {
 		CSVReadWrite.writeCsvGeraete(komponentenListe);
 	}
 
+	/**
+	 * Liest die Gebäude und speichert die Objekte in der ComboBox
+	 * 
+	 */
+	
 	private void readBuildings() {
 		List<Object> gebaeudeBezeichnungen = new ArrayList<>();
 		try {
@@ -310,13 +315,18 @@ public class MainForm extends JFrame {
 				gebaeudeBezeichnungen.add(gebaeude);
 			}
 		} catch (Exception e) {
-			System.out.println("fehler beim lesen der dateien");
+			System.out.println("fehler beim lesen der Gebäude");
 		} finally {
 			jCBGebaeude.setModel(new javax.swing.DefaultComboBoxModel(
 					gebaeudeBezeichnungen.toArray()));
 		}
 	}
 
+	/**
+	 * Liest die Räume und speichert die Objekte in der ComboBox
+	 * 
+	 */
+	
 	private void readRooms() {
 
 		List<Raum> raumListe = new ArrayList<>();
@@ -326,14 +336,18 @@ public class MainForm extends JFrame {
 			raumListe = gebaeude.getListRaeume();
 
 		} catch (Exception e) {
-
-			e.printStackTrace();
+				System.out.println("Keine Räume vorhanden");
 		} finally {
 			jCBRaumnummer.setModel(new javax.swing.DefaultComboBoxModel(
 					raumListe.toArray()));
 		}
 	}
-
+	
+	/**
+	 * Aktualisiert die Tabellenansicht
+	 * 
+	 * 
+	 */
 	private void fillTable() {
 		jDefaultTableModel.setRowCount(0);
 		for (Komponente komponente : CSVReadWrite.readCSV()) {
