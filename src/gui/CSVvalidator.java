@@ -14,11 +14,11 @@ import komponenten.Komponente;
 public class CSVvalidator {
 
 	/**
-	 * Überprüft ob in der KomponentenCSV Komponenten mit nicht mehr vorhandenen
-	 * Gebäuden gespeichert sind und entfernt diese
+	 * Überprüft ob eine Komponente sich in einem nicht mehr existierenden Gebäude befindet
+	 * und entfernt die Komponenten, falls dieser Fall eintritt.
 	 * 
 	 * @author Brian Korduan
-	 * @return List<Komponente>
+	 * @return void
 	 */
 	public static void checkGebaeudeKomponenteAssociation() {
 

@@ -111,7 +111,7 @@ public class MainForm extends JFrame {
 			contentPane.add(jTfBezeichnung, gbc_jTfBezeichnung);
 			jTfBezeichnung.setColumns(10);
 
-			jLKomponente = new JLabel("Ger\u00E4tetyp");
+			jLKomponente = new JLabel("Gerätetyp");
 			GridBagConstraints gbc_jLKomponente = new GridBagConstraints();
 			gbc_jLKomponente.anchor = GridBagConstraints.NORTHWEST;
 			gbc_jLKomponente.insets = new Insets(0, 0, 5, 5);
@@ -180,7 +180,8 @@ public class MainForm extends JFrame {
 					.addActionListener(e -> jBtnKomponenteHinzufuegenActionPerformed(e));
 
 			jTableKomponentenListe = new JTable(jDefaultTableModel);
-			jTableKomponentenListe.setColumnSelectionAllowed(true);
+			jTableKomponentenListe.setColumnSelectionAllowed(false);
+			jTableKomponentenListe.setDragEnabled(false);
 			fillTable();
 
 			jScPaTableView = new JScrollPane(jTableKomponentenListe);
@@ -300,23 +301,17 @@ public class MainForm extends JFrame {
 	}
 
 	private void readBuildings() {
-		Object[] gebaeudeBezeichnungen = new Object[100];
-
+	//	Object[] gebaeudeBezeichnungen = new Object[100];
+		List <Object> gebaeudeBezeichnungen = new ArrayList<>();
 		try {
-
-			int i = 0;
 			for (Gebaeude gebaeude : CSVReadWrite.readCSVGebaeude()) {
-
-				gebaeudeBezeichnungen[i] = gebaeude;
-				i++;
-
-				
+				gebaeudeBezeichnungen.add(gebaeude);
 			}
 		} catch (Exception e) {
 			System.out.println("fehler beim lesen der dateien");
 		}finally{
 			jCBGebaeude.setModel(new javax.swing.DefaultComboBoxModel(
-					gebaeudeBezeichnungen));
+					gebaeudeBezeichnungen.toArray()));
 		}
 	}
 
@@ -337,7 +332,6 @@ public class MainForm extends JFrame {
 	}
 
 	private void fillTable() {
-		
 		jDefaultTableModel.setRowCount(0);
 		for (Komponente komponente : CSVReadWrite.readCSV()) {
 
