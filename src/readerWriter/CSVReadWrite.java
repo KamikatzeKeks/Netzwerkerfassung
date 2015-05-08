@@ -1,8 +1,11 @@
 package readerWriter;
 
 /**
-*
-* @author Marco und Davis
+* CSVReadWrite.java
+* Liest und schreibt Daten aus den CSV Dateien
+* data.csv (Komponenten) sowie Gebäude.csv (Gebäude und Räume)
+* @author Davis Fröse & Marco D'Addona
+* @date	April/Mai 2015
 */
 
 import gebaeude.Gebaeude;
@@ -25,11 +28,8 @@ public class CSVReadWrite {
 	
 	//Delimiter used in CSV file
 	private static final String COMMA_DELIMITER = ",";
-		
-	//CSV file header
-//	private static final String FILE_HEADER = "Bezeichnung,KomponentenTyp,Gebäude,Raum";
-//	private static final String FILE_HEADER_BUILDING = "Bezeichnung, Straße, Plz, Ort, Räume";
-
+	
+	//Konstruktor
 	public CSVReadWrite()
 	{
 		
@@ -68,10 +68,25 @@ public class CSVReadWrite {
 
 	}
 	
+	/**
+	 * löscht die übergebene Datei
+	 * 
+	 * @author Brian Korduan
+	 * @param String fileName
+	 * @return void
+	 */
 	public static void deleteFile(String fileName){
 		File file = new File(fileName);
 		file.delete();
 	}
+	
+	/**
+	 * Erstellt eine CSV Datei mit den Geräten und schreibt neue Geräte in diese Datei
+	 * (data.csv)
+	 * @author Davis Fröse
+	 * @param ArrayList <Komponente> komponenten
+	 * @return void
+	 */
 	
 	public static void writeCsvGeraete(List<Komponente> komponenten)
 	{
@@ -118,6 +133,14 @@ public class CSVReadWrite {
 			
 		}
 	}
+	
+	/**
+	 * Erstellt eine CSV Datei mit den Gebäuden sowie den Räumen eines Gebäudes
+	 * 
+	 * @author Marco D'Addona
+	 * @param ArrayList <Komponente> komponenten
+	 * @return void
+	 */
 	
 	public static void writeCSVGebaeude(List<Gebaeude> gebaeude)
 	{
@@ -176,6 +199,17 @@ public class CSVReadWrite {
 			
 		}
 	}
+	
+	/**
+	 * Liest die Datei data.csv (komponenten) aus,
+	 * erstellt Komponenten-Objekte aus den Daten der CSV 
+	 * und erstellt eine ArrayList<Komponente> aus den entsprechenden Daten
+	 * 
+	 * @author Davis Fröse
+	 * @param 
+	 * @return List<Komponenten>
+	 */
+	
 	public static List<Komponente> readCSV() 
 	{
 		BufferedReader br;
@@ -221,6 +255,16 @@ public class CSVReadWrite {
 		return komponenten;
 	}
 
+	/**
+	 * Liest die CSV Datei mit den Komponenten aus, 
+	 * erstellt Gebäude und Raum-Objekte aus den Daten der CSV 
+	 * und erstellt eine ArrayList<Gebaeude> mit den entsprechenden Daten
+	 * Die Raum-Objekete zu jedem Gebäude werden in der CSV Date durch [] gekennzeichnet.
+	 * 
+	 * @author Marco D'Addona
+	 * @param 
+	 * @return List<Gebaeude>
+	 */
 	public static List<Gebaeude> readCSVGebaeude() 
 	{
 		BufferedReader br;
@@ -246,23 +290,12 @@ public class CSVReadWrite {
 				
 					String countraeume = readline.substring(readline.indexOf("[")+1, readline.indexOf("]"));
 
-					//Anzahl der Räume zahlen
-					//for (int i=0;i<countraeume.length();i++) {
-						//if (countraeume.charAt(i) == ',') {
-							//anz_raeume ++;
-						 //}
-					//}
-					
 					String[] split_raeume = countraeume.split(",");
 					
 					for(int i = 0; i<split_raeume.length; i++) {
 						raeume.add(new Raum(Integer.parseInt(split_raeume[i])));
 					}
 					
-					/*for(int i=0; i<raeume.size(); i++){
-						
-						System.out.println(raeume.get(i).getRaumnummer());
-					}*/
 					
 					
 				}

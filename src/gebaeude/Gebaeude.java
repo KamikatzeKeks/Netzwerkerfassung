@@ -3,6 +3,11 @@ package gebaeude;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * Klasse Gebäude
+ * @author Marco D'Addona
+ * 
+ */
 public class Gebaeude {
 
 	String bezeichnung;
@@ -22,6 +27,7 @@ public class Gebaeude {
 		this.anz_raeume = anz_raeume;
 		int count = 100;
 		
+		//Raumnummern werden aus der Anzahl der Räume generiert
 		for(int i = 0; i<anz_raeume; i++){
 			raeume.add(new Raum(count));
 			count = count+1;
