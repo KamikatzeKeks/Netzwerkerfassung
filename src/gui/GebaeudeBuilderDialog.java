@@ -32,6 +32,7 @@ import javax.swing.JTable;
 import readerWriter.CSVReadWrite;
 
 /**
+ * Frame zur Erstellung, Löschung und Bearbeitung von Gebäuden
  * 
  * @author Brian Korduan
  *
@@ -189,7 +190,7 @@ public class GebaeudeBuilderDialog extends JDialog {
 			gbc_scrollPane.gridy = 10;
 			contentPanel.add(scrollPane, gbc_scrollPane);
 			{
- 			}
+			}
 		}
 		{
 			buttonPane = new JPanel();
@@ -223,6 +224,11 @@ public class GebaeudeBuilderDialog extends JDialog {
 		}
 	}
 
+	/**
+	 * 
+	 * @param ActionEvent e
+	 */
+
 	private void jBtnGebaeudeHinzufuegenActionPerformed(ActionEvent e) {
 		List<Gebaeude> gebaeudeListe = new ArrayList<>();
 		try {
@@ -237,7 +243,7 @@ public class GebaeudeBuilderDialog extends JDialog {
 				CSVReadWrite.createFile("Gebaeude.csv");
 			}
 
-			 ex.printStackTrace();
+			ex.printStackTrace();
 
 		} finally {
 			gebaeudeListe.add(new Gebaeude(jTfGebaeudeBezeichnung.getText(),
@@ -257,16 +263,22 @@ public class GebaeudeBuilderDialog extends JDialog {
 				jDefaultTableModel.removeRow(selectedRows[i]);
 			}
 		}
-
-//		aenderungenUebernehmen();
-
+		 aenderungenUebernehmen();
 	}
+	
+	/**
+	 * Speichert alle Änderungen beim betätigen der Uebernehmen Schaltfläche
+	 * 
+	 *    
+	 * @param ActionEvent e
+	 */
 
 	private void jBtnOkActionPerformed(ActionEvent e) {
 
 		aenderungenUebernehmen();
+
 		this.dispose();
-		
+
 	}
 
 	private void jBtnCancelActionPerformed(ActionEvent e) {
@@ -278,28 +290,37 @@ public class GebaeudeBuilderDialog extends JDialog {
 		this.setVisible(true);
 
 	}
+	
+	/**
+	 * Aktualisiert die Tabellenansicht 
+	 * 
+	 */
 
 	private void fillTable() {
 
 		jDefaultTableModel.setRowCount(0);
 
 		for (Gebaeude gebaeude : CSVReadWrite.readCSVGebaeude()) {
-			int counter = 0;
-			for( Raum raum : gebaeude.getListRaeume()){
-				counter++;
+			int raumZaehler = 0;
+			for (Raum raum : gebaeude.getListRaeume()) {
+				raumZaehler++;
 			}
 
 			Object[] data = { gebaeude.getBezeichnung(), gebaeude.getStrasse(),
-					gebaeude.getPlz(), gebaeude.getOrt(),counter
-					};
+					gebaeude.getPlz(), gebaeude.getOrt(), raumZaehler };
 
 			jDefaultTableModel.addRow(data);
 		}
 
 	}
-
-	private void aenderungenUebernehmen() {
 	
+/**
+ * Liest alles aus der Tabelle und speichert die Änderung 
+ * Im Moment ist diese Methode noch notwendig wird jedoch später ersetzt durch eine Methode, welche
+ * die Daten immer direkt aus der Tabelle liest. Zurzeit bewahrt sie allerdings die Datei vor inkonsistenz 
+ * 
+ */
+	private void aenderungenUebernehmen(){
 		List<Gebaeude> gebaeudeListe = new ArrayList<>();
 
 		for (int i = 0; i < jDefaultTableModel.getRowCount(); i++) {
@@ -310,8 +331,8 @@ public class GebaeudeBuilderDialog extends JDialog {
 					jDefaultTableModel.getValueAt(i, 3).toString(),
 					(int) jDefaultTableModel.getValueAt(i, 4)));
 		}
-
-		CSVReadWrite.writeCSVGebaeude(gebaeudeListe);
+	
+	CSVReadWrite.writeCSVGebaeude(gebaeudeListe);
 	}
-
+		
 }

@@ -23,6 +23,16 @@ import java.util.List;
 
 import komponenten.Komponente;
 
+
+/**
+ * Diese Klasse speichert Komponente in einer CSV datei und kann diese auch lesen. Zudem kann sie auch
+ * Gebaeude speichern und lesen.Sie bietet außerdem Methoden zum löschen und Erstellen von CSV Dateien
+ * 
+ * 
+ * @author Davis Fröse
+ * @author Marco D'Addonna 
+ *
+ */
 public class CSVReadWrite {
 	
 	//Delimiter used in CSV file
@@ -34,13 +44,7 @@ public class CSVReadWrite {
 		
 	}
 	
-	/**
-	 * Überprüft ob eine Datei existiert
-	 * 
-	 * @author Brian Korduan
-	 * @param String fileName
-	 * @return boolean
-	 */
+
 	public static boolean doesFileExist(String fileName)
 	{
 		File csvFile = new File(fileName);
@@ -53,27 +57,12 @@ public class CSVReadWrite {
 		
 	}
 	
-
-	/**
-	 * erstellt eine Datei
-	 * 
-	 * @author Brian Korduan
-	 * @param String fileName
-	 * @return void
-	 */
 	public static void createFile(String fileName){
 		new File(fileName);
 		
 
 	}
-	
-	/**
-	 * löscht die übergebene Datei
-	 * 
-	 * @author Brian Korduan
-	 * @param String fileName
-	 * @return void
-	 */
+
 	public static void deleteFile(String fileName){
 		File file = new File(fileName);
 		file.delete();

@@ -270,7 +270,8 @@ public class MainForm extends JFrame {
 
 		for (int i = 0; i < jDefaultTableModel.getRowCount(); i++) {
 
-		liste.add(new Komponente(jDefaultTableModel.getValueAt(i, 0).toString(),
+			liste.add(new Komponente(jDefaultTableModel.getValueAt(i, 0)
+					.toString(),
 					jDefaultTableModel.getValueAt(i, 1).toString(),
 					jDefaultTableModel.getValueAt(i, 2).toString(),
 					jDefaultTableModel.getValueAt(i, 3).toString()));
@@ -291,43 +292,45 @@ public class MainForm extends JFrame {
 	}
 
 	private void addKomponenteToList() {
-		
+
 		List<Komponente> komponentenListe = new ArrayList<>();
 		komponentenListe = CSVReadWrite.readCSV();
-		komponentenListe.add( new Komponente(jTfBezeichnung.getText(), jCBKomponente.getSelectedItem().toString(),
-				 jCBGebaeude.getSelectedItem().toString(), jCBRaumnummer.getSelectedItem().toString()));
+		komponentenListe.add(new Komponente(jTfBezeichnung.getText(),
+				jCBKomponente.getSelectedItem().toString(), jCBGebaeude
+						.getSelectedItem().toString(), jCBRaumnummer
+						.getSelectedItem().toString()));
 
 		CSVReadWrite.writeCsvGeraete(komponentenListe);
 	}
 
 	private void readBuildings() {
-	//	Object[] gebaeudeBezeichnungen = new Object[100];
-		List <Object> gebaeudeBezeichnungen = new ArrayList<>();
+		List<Object> gebaeudeBezeichnungen = new ArrayList<>();
 		try {
 			for (Gebaeude gebaeude : CSVReadWrite.readCSVGebaeude()) {
 				gebaeudeBezeichnungen.add(gebaeude);
 			}
 		} catch (Exception e) {
 			System.out.println("fehler beim lesen der dateien");
-		}finally{
+		} finally {
 			jCBGebaeude.setModel(new javax.swing.DefaultComboBoxModel(
 					gebaeudeBezeichnungen.toArray()));
 		}
 	}
 
 	private void readRooms() {
+
+		List<Raum> raumListe = new ArrayList<>();
 		try {
-
-			List<Raum> raumListe = new ArrayList<>();
-
 			Gebaeude gebaeude = (Gebaeude) jCBGebaeude.getSelectedItem();
 
 			raumListe = gebaeude.getListRaeume();
 
-			jCBRaumnummer.setModel(new javax.swing.DefaultComboBoxModel(
-					raumListe.toArray()));
 		} catch (Exception e) {
 
+			e.printStackTrace();
+		} finally {
+			jCBRaumnummer.setModel(new javax.swing.DefaultComboBoxModel(
+					raumListe.toArray()));
 		}
 	}
 
@@ -335,8 +338,10 @@ public class MainForm extends JFrame {
 		jDefaultTableModel.setRowCount(0);
 		for (Komponente komponente : CSVReadWrite.readCSV()) {
 
-			Object[] data = { komponente.getBezeichnung(), komponente.getKomponentenTyp(), komponente.getGebaeude(), komponente.getRaum() };
-		
+			Object[] data = { komponente.getBezeichnung(),
+					komponente.getKomponentenTyp(), komponente.getGebaeude(),
+					komponente.getRaum() };
+
 			jDefaultTableModel.addRow(data);
 
 		}
